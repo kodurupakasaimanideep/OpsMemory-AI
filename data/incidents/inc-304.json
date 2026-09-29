@@ -1,0 +1,32 @@
+{
+  "id": "INC-304",
+  "duration_min": 0,
+  "error_type": "checkout transactions intermittently failing with HTTP 504 gateway timeout during flash sale.",
+  "incident_id": "INC-304",
+  "last_synced_at": "2026-09-28T22:48:04.116262Z",
+  "observations": [
+    "Database connection pool saturated",
+    "Payment provider webhook processing delay reached 8500ms",
+    "Network packet drops observed on egress interface eth0",
+    "Spike in 504 errors began at 14:00 UTC during traffic surge"
+  ],
+  "resolution": null,
+  "root_cause": null,
+  "service": "checkout-gateway",
+  "severity": "HIGH",
+  "started_at": "2026-09-28T22:48:04.115070Z",
+  "status": "INVESTIGATING",
+  "symptom": "checkout transactions intermittently failing with HTTP 504 gateway timeout during flash sale.",
+  "symptoms": [
+    "checkout transactions intermittently failing with HTTP 504 gateway timeout during flash sale."
+  ],
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-304 recorded for checkout-gateway",
+      "type": "warning"
+    }
+  ],
+  "title": "checkout-gateway: checkout transactions intermittently failing with HTTP 504 g"
+}

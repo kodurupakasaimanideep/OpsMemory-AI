@@ -1,0 +1,51 @@
+{
+  "id": "INC-550",
+  "incident_id": "INC-550",
+  "title": "Payment API Elevated 503 Gateway Drop",
+  "service": "Payment API",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T16:03:59.183317Z",
+  "severity": "CRITICAL",
+  "error_type": "HTTP 503",
+  "symptoms": [
+    "Payment checkout transactions dropping with HTTP 503",
+    "P99 latency spiked from 42ms to 3,900ms",
+    "Database connection pool reported 0 available sockets (50/50 in use)"
+  ],
+  "observations": [
+    "Active connections hit max pool limit of 50",
+    "Application logs show PoolAcquireTimeoutException",
+    "CPU and memory on application pods remain healthy at 35%",
+    "Recent deployment v2.4.1 altered connection lease reaper"
+  ],
+  "evidence": [
+    "Pool active count dropped from 50/50 to 18/65 after configuration reload",
+    "P99 latency stabilized back to baseline 45ms",
+    "Zero HTTP 503 errors recorded in subsequent 15-minute telemetry window"
+  ],
+  "verification": [
+    "Executed load-test runner against /checkout endpoint with 500 RPS \u2014 0 errors",
+    "Verified connection cleanup in PostgreSQL pg_stat_activity"
+  ],
+  "resolution_steps": [],
+  "root_cause": "Database connection pool saturated under concurrent peak checkout checkout traffic post-deployment v2.4.1",
+  "resolution": "Increased connection pool size to 65 sockets, tuned idle reaper to 30s, and restarted payment-service pods",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-550 recorded for Payment API",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Database connection pool saturated under concurrent peak checkout checkout traffic post-deployment v2.4.1",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Payment checkout transactions dropping with HTTP 503",
+  "last_synced_at": "2026-09-29T16:04:01.559859Z",
+  "resolved_at": "2026-09-29T16:04:01.559484Z",
+  "engineer_feedback": "Permanent lesson: Always configure connection acquisition timeout alert at 80% pool threshold."
+}

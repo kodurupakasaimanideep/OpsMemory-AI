@@ -1,0 +1,45 @@
+{
+  "id": "INC-995",
+  "incident_id": "INC-995",
+  "title": "persistence-audit-service: Disk write durability audit test.",
+  "service": "persistence-audit-service",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T14:53:16.999023Z",
+  "severity": "HIGH",
+  "error_type": "Disk write durability audit test.",
+  "symptoms": [
+    "Disk write durability audit test."
+  ],
+  "observations": [
+    "Verifying SQLite database persistence across process restarts",
+    "Verifying JSON organizational memory survival"
+  ],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": "Disk journal flush synchronization verified in SQLite WAL mode",
+  "resolution": "Applied WAL mode persistence to opsmind.db and verified on restart",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-995 recorded for persistence-audit-service",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Disk journal flush synchronization verified in SQLite WAL mode",
+      "type": "resolved"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Disk journal flush synchronization verified in SQLite WAL mode",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Disk write durability audit test.",
+  "last_synced_at": "2026-09-29T14:53:41.012875Z",
+  "resolved_at": "2026-09-29T14:53:41.011800Z",
+  "engineer_feedback": "Confirmed by engineer."
+}

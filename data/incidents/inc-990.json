@@ -1,0 +1,51 @@
+{
+  "id": "INC-990",
+  "incident_id": "INC-990",
+  "title": "quantum-ledger-service: Cryptographic state synchronization failure across consensus",
+  "service": "quantum-ledger-service",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T14:50:29.730751Z",
+  "severity": "HIGH",
+  "error_type": "Cryptographic state synchronization failure across consensus nodes.",
+  "symptoms": [
+    "Cryptographic state synchronization failure across consensus nodes."
+  ],
+  "observations": [
+    "Raft consensus quorum lost",
+    "State mismatch on block height 44901",
+    "Network partition on region eu-central-2"
+  ],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": "NTP time drift caused Raft leader lease expiration across AZs",
+  "resolution": "Synchronized chrony NTP daemon and increased election timeout to 1500ms",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-990 recorded for quantum-ledger-service",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: NTP time drift caused Raft leader lease expiration across AZs",
+      "type": "resolved"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: NTP time drift caused Raft leader lease expiration across AZs",
+      "type": "resolved"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: NTP time drift caused Raft leader lease expiration across AZs",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Cryptographic state synchronization failure across consensus nodes.",
+  "last_synced_at": "2026-09-29T14:55:08.802277Z",
+  "resolved_at": "2026-09-29T14:55:08.868188Z",
+  "engineer_feedback": "Confirmed by engineer."
+}

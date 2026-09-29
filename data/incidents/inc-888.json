@@ -1,0 +1,56 @@
+{
+  "id": "INC-888",
+  "incident_id": "INC-888",
+  "title": "satellite-telemetry-gateway: Ground station carrier phase lock lost on transponder band K",
+  "service": "satellite-telemetry-gateway",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T14:57:50.842727Z",
+  "severity": "HIGH",
+  "error_type": "Ground station carrier phase lock lost on transponder band Ku-4.",
+  "symptoms": [
+    "Ground station carrier phase lock lost on transponder band Ku-4."
+  ],
+  "observations": [
+    "Doppler shift compensation error +14.2 kHz",
+    "Bit error rate spiked above 10^-3",
+    "Atmospheric attenuation index 8.9 dB"
+  ],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": "Solar flare geomagnetic storm induced ionospheric scintillation",
+  "resolution": "Switched downlink frequency band to Ka-1 backup transponder and recalibrated phase lock loop",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-888 recorded for satellite-telemetry-gateway",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Solar flare geomagnetic storm induced ionospheric scintillation",
+      "type": "resolved"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Solar flare geomagnetic storm induced ionospheric scintillation",
+      "type": "resolved"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Solar flare geomagnetic storm induced ionospheric scintillation",
+      "type": "resolved"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Solar flare geomagnetic storm induced ionospheric scintillation",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Ground station carrier phase lock lost on transponder band Ku-4.",
+  "last_synced_at": "2026-09-29T16:04:06.740664Z",
+  "resolved_at": "2026-09-29T16:04:06.774052Z",
+  "engineer_feedback": "Confirmed by engineer."
+}

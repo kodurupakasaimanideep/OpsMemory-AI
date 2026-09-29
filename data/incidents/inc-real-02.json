@@ -1,0 +1,48 @@
+{
+  "id": "INC-REAL-02",
+  "incident_id": "INC-REAL-02",
+  "title": "Payment API Database Connection Timeout during Batch Reporting",
+  "service": "Payment API",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T13:53:53.873474Z",
+  "severity": "HIGH",
+  "error_type": "Database Connection Timeout",
+  "symptoms": [
+    "Postgres connection timeouts across all API clients",
+    "Database server CPU pegged at 98%",
+    "p99 latency spiked to 6.8s on primary read/write node"
+  ],
+  "observations": [
+    "pg_stat_activity shows long-running sequential scan query on ledger_transactions table",
+    "Worker processes have NO socket leaks"
+  ],
+  "evidence": [
+    "pg_stat_activity confirmed sequential scan on 14M rows in ledger_transactions",
+    "Worker connection pool was healthy; timeouts were caused by database server latency"
+  ],
+  "verification": [
+    "Database CPU dropped from 98% to 18%",
+    "p99 latency returned to 45ms and connection backlog cleared"
+  ],
+  "resolution_steps": [],
+  "root_cause": "Database CPU and I/O overload caused by unindexed analytical reporting query executing against primary database replica.",
+  "resolution": "Terminated blocking query PID 44102, added index on ledger_transactions(merchant_id, created_at), and redirected reporting queries to read replica.",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-REAL-02 recorded for Payment API",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Database CPU and I/O overload caused by unindexed analytical reporting query executing against primary database replica.",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Postgres connection timeouts across all API clients",
+  "last_synced_at": "2026-09-29T13:53:53.875846Z",
+  "resolved_at": "2026-09-29T13:53:53.935808Z",
+  "engineer_feedback": "Distinction verified: DB overload vs socket leak"
+}

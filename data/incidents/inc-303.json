@@ -1,0 +1,32 @@
+{
+  "id": "INC-303",
+  "duration_min": 0,
+  "error_type": "inventory requests are intermittently returning HTTP 502 during peak traffic.",
+  "incident_id": "INC-303",
+  "last_synced_at": "2026-09-28T22:47:42.121702Z",
+  "observations": [
+    "CPU is normal",
+    "Redis latency is elevated",
+    "application logs show upstream timeout",
+    "issue started after a recent deployment"
+  ],
+  "resolution": null,
+  "root_cause": null,
+  "service": "inventory-service",
+  "severity": "HIGH",
+  "started_at": "2026-09-28T22:47:42.117623Z",
+  "status": "INVESTIGATING",
+  "symptom": "inventory requests are intermittently returning HTTP 502 during peak traffic.",
+  "symptoms": [
+    "inventory requests are intermittently returning HTTP 502 during peak traffic."
+  ],
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-303 recorded for inventory-service",
+      "type": "warning"
+    }
+  ],
+  "title": "inventory-service: inventory requests are intermittently returning HTTP 502 dur"
+}

@@ -1,0 +1,37 @@
+{
+  "id": "INC-401",
+  "incident_id": "INC-401",
+  "title": "payment-service: HTTP 503 during peak traffic",
+  "service": "payment-service",
+  "status": "unresolved investigation",
+  "started_at": "2026-09-29T00:17:00.611661Z",
+  "severity": "HIGH",
+  "error_type": "HTTP 503 during peak traffic",
+  "symptoms": [
+    "HTTP 503 during peak traffic",
+    "payment requests are intermittently returning HTTP 503 during peak traffic."
+  ],
+  "observations": [
+    "Connection acquisition delays",
+    "DB pool at 98%",
+    "CPU utilization is at 98%",
+    "Application logs show HTTP worker socket exhaustion",
+    "Database connections remain low at 5 active connections"
+  ],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": null,
+  "resolution": null,
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-401 recorded for payment-service",
+      "type": "warning"
+    }
+  ],
+  "symptom": "payment requests are intermittently returning HTTP 503 during peak traffic.",
+  "last_synced_at": "2026-09-29T14:55:08.648914Z"
+}

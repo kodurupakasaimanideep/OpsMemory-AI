@@ -1,0 +1,37 @@
+{
+  "id": "INC-HS-LIVE-TEST-001",
+  "incident_id": "INC-HS-LIVE-TEST-001",
+  "title": "Payment API: payment API failures caused by database connection pool exha",
+  "service": "Payment API",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T15:11:41.675284Z",
+  "severity": "HIGH",
+  "error_type": "payment API failures caused by database connection pool exhaustion (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+  "symptoms": [
+    "payment API failures caused by database connection pool exhaustion (OPSMIND_HINDSIGHT_LIVE_TEST_001)"
+  ],
+  "observations": [],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": "Database connection pool exhausted under concurrent checkout traffic (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+  "resolution": "Increased pool size to 65 and tuned connection reaper (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-HS-LIVE-TEST-001 recorded for Payment API",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Database connection pool exhausted under concurrent checkout traffic (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "payment API failures caused by database connection pool exhaustion (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+  "last_synced_at": "2026-09-29T15:11:41.676274Z",
+  "resolved_at": "2026-09-29T15:11:44.113186Z",
+  "engineer_feedback": "Confirmed by engineer."
+}

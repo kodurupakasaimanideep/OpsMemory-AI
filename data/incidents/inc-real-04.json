@@ -1,0 +1,31 @@
+{
+  "id": "INC-REAL-04",
+  "incident_id": "INC-REAL-04",
+  "title": "Notification Service Push Notification Kafka Consumer Stalling",
+  "service": "Notification Service",
+  "status": "INVESTIGATING",
+  "started_at": "2026-09-29T13:54:00.725369Z",
+  "severity": "HIGH",
+  "error_type": "Kafka Consumer Rebalance Stall",
+  "symptoms": [
+    "Kafka consumer rebalance stall on notification.push topic",
+    "Consumer lag accumulating rapidly"
+  ],
+  "observations": [],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": null,
+  "resolution": null,
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-REAL-04 recorded for Notification Service",
+      "type": "warning"
+    }
+  ],
+  "symptom": "Kafka consumer rebalance stall on notification.push topic",
+  "last_synced_at": "2026-09-29T13:54:00.727309Z"
+}

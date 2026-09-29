@@ -1,0 +1,61 @@
+{
+  "id": "INC-002",
+  "title": "Payment API Database Overload via Unindexed Batch Query",
+  "service": "Payment API",
+  "error_type": "Database Connection Timeout",
+  "severity": "HIGH",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T14:10:00Z",
+  "resolved_at": "2026-09-29T14:35:00Z",
+  "duration_min": 25,
+  "engineer": "Sarah Chen",
+  "shift": "Day Shift (08:00 - 17:00)",
+  "deployment": {
+    "service": "reporting-worker",
+    "version": "v1.8.0",
+    "deployed_at": "2026-09-29T14:00:00Z"
+  },
+  "symptoms": [
+    "Postgres connection timeouts across all API clients",
+    "Database server CPU pegged at 98%",
+    "p99 latency spiked to 6.8s on primary read/write node",
+    "IOPS ceiling reached on primary storage volume"
+  ],
+  "investigation_steps": [
+    "Queried pg_stat_activity for longest running queries",
+    "Discovered full table scan query on 14M rows in ledger_transactions table",
+    "Confirmed application worker pool was NOT leaking sockets",
+    "Identified new reporting batch cron triggered on primary rather than read-replica"
+  ],
+  "findings": [
+    "Root cause is database engine CPU & I/O overload, NOT a connection leak in application code",
+    "Worker connection pool saturated because database server was unable to service queries fast enough"
+  ],
+  "root_cause": "Database CPU and I/O overload caused by unindexed analytical reporting query executing against primary database replica.",
+  "actions_taken": [
+    "Terminated long-running reporting query process (PID 44102)",
+    "Added composite index on ledger_transactions(merchant_id, created_at)",
+    "Redirected reporting-worker connection string to read-only replica endpoint"
+  ],
+  "resolution": "Terminated blocking query, added index on ledger_transactions, and redirected analytical traffic to read replica.",
+  "verification": "Database CPU dropped from 98% to 18%, p99 latency returned to 45ms, and connection pool backlog cleared immediately.",
+  "recommendations": [
+    "Enforce read-replica routing for all automated reporting and reconciliation queries",
+    "Configure statement_timeout = '30s' on primary database"
+  ],
+  "engineer_feedback": "Important distinction: Even though symptom was DB connection timeout, cause was DB server overload from batch query, not a worker leak.",
+  "similarity_score": 0.89,
+  "telemetry": {
+    "cpu_percent": 98.4,
+    "memory_percent": 84.2,
+    "error_count": 890,
+    "p99_latency_sec": 6.8,
+    "db_active_connections": 50,
+    "db_max_connections": 50
+  },
+  "logs_excerpt": [
+    "2026-09-29T14:10:05Z WARN  [postgres] slow query: SELECT * FROM ledger_transactions WHERE status='PENDING' (duration: 42300ms)",
+    "2026-09-29T14:10:20Z ERROR [payment-service] connection pool timeout waiting for connection from pool"
+  ],
+  "last_synced_at": "2026-09-29T13:27:48.934502Z"
+}

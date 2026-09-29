@@ -1,0 +1,58 @@
+{
+  "id": "INC-207",
+  "title": "Kafka Consumer Rebalance Cascade & Partition Lag Spike",
+  "service": "Notification Service",
+  "error_type": "Consumer Lag & Rebalance Storm",
+  "severity": "HIGH",
+  "status": "INVESTIGATING",
+  "started_at": "2026-09-28T10:52:00Z",
+  "duration_min": 6,
+  "deployment": {
+    "service": "notification-service",
+    "version": "v1.4.0",
+    "deployed_at": "2026-09-28T10:48:00Z",
+    "author": "event-stream@microtech.io",
+    "commit_hash": "e92bc44",
+    "changes_summary": "Upgraded batch processing chunk size and consumer poll timeout"
+  },
+  "symptoms": [
+    "Consumer lag jumped to 142,000 unread messages across 16 partitions",
+    "Continuous consumer group rebalances causing message delivery halts",
+    "Worker heartbeat timeouts exceeded 30,000ms"
+  ],
+  "telemetry": {
+    "cpu_percent": 88.4,
+    "memory_percent": 62.1,
+    "error_count": 650,
+    "p99_latency_sec": 5.2,
+    "db_active_connections": 12,
+    "db_max_connections": 50
+  },
+  "logs_excerpt": [
+    "[2026-09-28 10:52:10] [ERROR] [notification-service] CommitFailedException: Commit cannot be completed since the group has rebalanced and assigned the partitions to another member",
+    "[2026-09-28 10:52:18] [WARN] [kafka-cluster] Member worker-7c9b8 exceeded max.poll.interval.ms (30000ms), kicking member from consumer group"
+  ],
+  "timeline": [
+    {
+      "time": "10:48 AM",
+      "event": "Deployment v1.4.0 rolled out to notification-service workers",
+      "type": "deploy"
+    },
+    {
+      "time": "10:52 AM",
+      "event": "Consumer lag threshold breached (>100k messages). PagerDuty alert triggered",
+      "type": "error"
+    },
+    {
+      "time": "10:53 AM",
+      "event": "OpsMind AI Agent queried Hindsight: No prior historical incidents found",
+      "type": "agent"
+    },
+    {
+      "time": "10:53 AM",
+      "event": "Switched to AI Investigation Mode (Brain 1)",
+      "type": "agent"
+    }
+  ],
+  "last_synced_at": "2026-09-29T13:27:49.229690Z"
+}

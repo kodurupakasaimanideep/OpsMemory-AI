@@ -1,0 +1,64 @@
+{
+  "id": "INC-001",
+  "title": "Payment API Database Connection Timeout",
+  "service": "Payment API",
+  "error_type": "Database Connection Timeout",
+  "severity": "CRITICAL",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T09:15:00Z",
+  "resolved_at": "2026-09-29T09:42:00Z",
+  "duration_min": 27,
+  "engineer": "Alex Rivera",
+  "shift": "Day Shift (08:00 - 17:00)",
+  "deployment": {
+    "service": "payment-service",
+    "version": "v2.4.2",
+    "deployed_at": "2026-09-29T09:00:00Z",
+    "author": "alex@microtech.io"
+  },
+  "symptoms": [
+    "Database connection pool saturated (50/50 sockets)",
+    "HTTP 503 Service Unavailable on /api/v1/payments",
+    "Payment callback queue backlog exceeded 15,000 tasks",
+    "Gateway timeout on payment webhook processing"
+  ],
+  "investigation_steps": [
+    "Checked Postgres active connections in pg_stat_activity",
+    "Inspected uvicorn worker pool memory and socket descriptors",
+    "Identified unclosed DB session in payment_webhook_callback handler",
+    "Verified database server CPU and IOPS were under 35%"
+  ],
+  "findings": [
+    "Database server itself was healthy and responsive",
+    "Application worker processes were failing to return connection handles to pool",
+    "Connection leak triggered whenever client disconnected prematurely during webhook processing"
+  ],
+  "root_cause": "Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client timeout/disconnect).",
+  "actions_taken": [
+    "Gracefully restarted affected payment worker pods",
+    "Deployed hotfix v2.4.2 wrapping db_session in try-finally context manager",
+    "Flushed webhook retry queue"
+  ],
+  "resolution": "Restarted affected worker processes and deployed connection-pool context manager fix in v2.4.2.",
+  "verification": "Error rate returned to 0.01%, active DB connections stabilized at 12/50 under full production load.",
+  "recommendations": [
+    "Enforce connection pool timeout ceiling of 5 seconds in PgBouncer",
+    "Add automated alert for unclosed connection pool sockets > 80%"
+  ],
+  "engineer_feedback": "Hotfix v2.4.2 stabilized the connection pool. Night shift should monitor connection counts during scheduled 22:00 batch.",
+  "similarity_score": 0.96,
+  "telemetry": {
+    "cpu_percent": 34.2,
+    "memory_percent": 68.1,
+    "error_count": 1420,
+    "p99_latency_sec": 4.8,
+    "db_active_connections": 50,
+    "db_max_connections": 50
+  },
+  "logs_excerpt": [
+    "2026-09-29T09:15:12Z ERROR [payment-service] sqlalchemy.exc.TimeoutError: QueuePool limit of size 50 overflow 10 reached",
+    "2026-09-29T09:15:18Z WARN  [gateway] upstream payment-service timed out after 5000ms",
+    "2026-09-29T09:16:04Z ERROR [payment-service] unhandled client disconnect left connection socket #42 open"
+  ],
+  "last_synced_at": "2026-09-29T13:27:48.905615Z"
+}

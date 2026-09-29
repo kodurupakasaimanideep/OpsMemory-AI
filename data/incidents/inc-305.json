@@ -1,0 +1,43 @@
+{
+  "id": "INC-305",
+  "incident_id": "INC-305",
+  "title": "authentication-service: Login requests intermittently returned HTTP 503 during peak ",
+  "service": "authentication-service",
+  "status": "RESOLVED",
+  "started_at": "2026-09-28T23:34:08.253533Z",
+  "severity": "HIGH",
+  "error_type": "Login requests intermittently returned HTTP 503 during peak traffic.",
+  "symptoms": [
+    "Login requests intermittently returned HTTP 503 during peak traffic."
+  ],
+  "observations": [],
+  "evidence": [
+    "Database connections reached the configured maximum during the incident.",
+    "Application logs showed unreleased database connections.",
+    "The background authentication worker was confirmed to retain connections after failed transactions."
+  ],
+  "verification": [
+    "Verified database connections returned to normal.",
+    "HTTP 503 errors stopped after the fix."
+  ],
+  "resolution_steps": [
+    "Fixed the connection release logic in the authentication worker.",
+    "Restarted authentication-service pods."
+  ],
+  "root_cause": "The database connection pool was exhausted because an authentication background worker opened database connections and did not release them after failed transactions.",
+  "resolution": [
+    "Fixed the connection release logic in the authentication worker.",
+    "Restarted authentication-service pods."
+  ],
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-305 recorded for authentication-service",
+      "type": "warning"
+    }
+  ],
+  "symptom": "Login requests intermittently returned HTTP 503 during peak traffic.",
+  "last_synced_at": "2026-09-28T23:34:52.194118Z"
+}

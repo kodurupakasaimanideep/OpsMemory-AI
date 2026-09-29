@@ -1,0 +1,57 @@
+{
+  "id": "INC-003",
+  "title": "Checkout Gateway HTTP 504 Downstream Partner Timeout",
+  "service": "Checkout Gateway",
+  "error_type": "HTTP 504 Gateway Timeout",
+  "severity": "HIGH",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T11:00:00Z",
+  "resolved_at": "2026-09-29T11:22:00Z",
+  "duration_min": 22,
+  "engineer": "Michael Torres",
+  "shift": "Day Shift (08:00 - 17:00)",
+  "deployment": {
+    "service": "checkout-gateway",
+    "version": "v3.1.0",
+    "deployed_at": "2026-09-28T18:00:00Z"
+  },
+  "symptoms": [
+    "HTTP 504 Gateway Timeout on checkout payment submission endpoints",
+    "Upstream thread pool exhaustion on API Gateway",
+    "Customer checkout abandonment spike of 45%"
+  ],
+  "investigation_steps": [
+    "Analyzed distributed trace spans in OpenTelemetry collector",
+    "Identified 94% of latency spent in external HTTP call to third-party card processing partner",
+    "Confirmed internal application database and cache response times were normal (< 12ms)",
+    "Checked partner status dashboard and confirmed regional degradation"
+  ],
+  "findings": [
+    "Internal microservices were healthy",
+    "Downstream card processor API was taking 14+ seconds per authorization request without failing fast"
+  ],
+  "root_cause": "Downstream payment processing provider experienced regional latency degradation, exhausting local connection threads due to lack of circuit breaker.",
+  "actions_taken": [
+    "Tripped circuit breaker to divert payments to secondary payment rail (Acquirer B)",
+    "Lowered upstream partner HTTP timeout from 15s to 2.5s",
+    "Enabled asynchronous payment authorization polling"
+  ],
+  "resolution": "Engaged circuit breaker fallback to secondary payment rail and tightened upstream timeout thresholds.",
+  "verification": "Checkout gateway latency normalized to 380ms, payment success rate recovered to 99.4%.",
+  "recommendations": [
+    "Automate multi-rail active-active payment routing based on rolling p95 latency",
+    "Implement exponential backoff retry on transient gateway 504 errors"
+  ],
+  "engineer_feedback": "Secondary payment rail handled 100% of volume seamlessly once circuit breaker was manually tripped.",
+  "similarity_score": 0.84,
+  "telemetry": {
+    "cpu_percent": 28.5,
+    "memory_percent": 52.3,
+    "error_count": 640,
+    "p99_latency_sec": 14.2
+  },
+  "logs_excerpt": [
+    "2026-09-29T11:00:15Z ERROR [checkout-gateway] httpx.ReadTimeout: timed out after 15000ms calling https://api.partner-processor.net/v2/charges",
+    "2026-09-29T11:00:22Z WARN  [gateway] thread pool 98% busy waiting on downstream I/O"
+  ]
+}

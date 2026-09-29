@@ -1,0 +1,31 @@
+{
+  "id": "INC-502",
+  "incident_id": "INC-502",
+  "title": "auth-service: OAuth token validation requests returning HTTP 500 during de",
+  "service": "auth-service",
+  "status": "unresolved investigation",
+  "started_at": "2026-09-28T22:33:47.255827Z",
+  "severity": "HIGH",
+  "error_type": "OAuth token validation requests returning HTTP 500 during deployment rollover.",
+  "symptoms": [
+    "OAuth token validation requests returning HTTP 500 during deployment rollover."
+  ],
+  "observations": [
+    "Token introspection cache hit ratio dropped to 12%",
+    "Redis latency spiked to 850ms",
+    "Application connection pool exhausted"
+  ],
+  "root_cause": "unknown / not determined",
+  "resolution": "none",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-502 recorded for auth-service",
+      "type": "warning"
+    }
+  ],
+  "symptom": "OAuth token validation requests returning HTTP 500 during deployment rollover.",
+  "last_synced_at": "2026-09-28T22:33:47.256831Z"
+}

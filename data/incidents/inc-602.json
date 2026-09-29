@@ -1,0 +1,34 @@
+{
+  "id": "INC-602",
+  "incident_id": "INC-602",
+  "title": "Payment API: payment requests are intermittently returning HTTP 503 durin",
+  "service": "Payment API",
+  "status": "unresolved investigation",
+  "started_at": "2026-09-29T14:57:50.739530Z",
+  "severity": "HIGH",
+  "error_type": "payment requests are intermittently returning HTTP 503 during peak traffic.",
+  "symptoms": [
+    "payment requests are intermittently returning HTTP 503 during peak traffic."
+  ],
+  "observations": [
+    "CPU utilization is normal at 40%",
+    "Database connection pool has 45 free connections",
+    "Upstream OAuth2 authentication provider is timing out on token validation requests"
+  ],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": null,
+  "resolution": null,
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-602 recorded for Payment API",
+      "type": "warning"
+    }
+  ],
+  "symptom": "payment requests are intermittently returning HTTP 503 during peak traffic.",
+  "last_synced_at": "2026-09-29T16:04:06.674604Z"
+}

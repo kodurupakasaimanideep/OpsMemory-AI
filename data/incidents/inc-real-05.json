@@ -1,0 +1,47 @@
+{
+  "id": "INC-REAL-05",
+  "incident_id": "INC-REAL-05",
+  "title": "Auth Service Latency Degradation post v3.2.0",
+  "service": "Auth Service",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T13:54:00.823560Z",
+  "severity": "MEDIUM",
+  "error_type": "High Latency & Token Validation Delay",
+  "symptoms": [
+    "JWT token validation latency increased from 5ms to 450ms"
+  ],
+  "observations": [],
+  "evidence": [
+    "Redis monitor log showed 88% miss on auth:token:* keys"
+  ],
+  "verification": [
+    "Token validation latency returned to 4.8ms"
+  ],
+  "resolution_steps": [],
+  "root_cause": "Key prefix mismatch in v3.2.0 cache key generator caused 88% cache miss rate.",
+  "resolution": "Patched cache key generator in v3.2.1 and warmed token cache.",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-REAL-05 recorded for Auth Service",
+      "type": "warning"
+    },
+    {
+      "time": "13:54",
+      "event": "State updated to INVESTIGATION: Engineer actively testing hypothesis in staging/telemetry",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Key prefix mismatch in v3.2.0 cache key generator caused 88% cache miss rate.",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "JWT token validation latency increased from 5ms to 450ms",
+  "last_synced_at": "2026-09-29T13:54:00.986823Z",
+  "lifecycle_state": "INVESTIGATION",
+  "resolved_at": "2026-09-29T13:54:00.983875Z",
+  "engineer_feedback": "Confirmed by engineer."
+}

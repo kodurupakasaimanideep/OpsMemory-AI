@@ -1,0 +1,52 @@
+{
+  "id": "INC-206",
+  "title": "Auth Service High Latency & Token Validation Degraded",
+  "service": "Auth Service",
+  "error_type": "High latency",
+  "severity": "MEDIUM",
+  "status": "INVESTIGATING",
+  "started_at": "2026-09-28T10:50:00Z",
+  "duration_min": 4,
+  "deployment": {
+    "service": "auth-service",
+    "version": "v3.1.2",
+    "deployed_at": "2026-09-28T09:00:00Z",
+    "author": "security-team@microtech.io",
+    "changes_summary": "Rotated Redis JWT verification keys"
+  },
+  "symptoms": [
+    "Authentication endpoints response time escalated from 12ms to 1,250ms",
+    "Redis cluster cache hit ratio degraded from 99.2% to 41.5%",
+    "Downstream services queueing login validation requests"
+  ],
+  "telemetry": {
+    "cpu_percent": 35.0,
+    "memory_percent": 55.4,
+    "error_count": 312,
+    "p99_latency_sec": 1.25,
+    "db_active_connections": 22,
+    "db_max_connections": 60
+  },
+  "logs_excerpt": [
+    "[2026-09-28 10:49:50] [WARN] [auth-service] RedisCacheMiss: Fallback to database user verification for 58% requests",
+    "[2026-09-28 10:50:05] [INFO] [auth-service] Latency alert triggered on /oauth/token"
+  ],
+  "timeline": [
+    {
+      "time": "09:00 AM",
+      "event": "JWT Key rotation deployed",
+      "type": "deploy"
+    },
+    {
+      "time": "10:50 AM",
+      "event": "Cache miss cascade increased latency to 1.25s",
+      "type": "warning"
+    },
+    {
+      "time": "10:51 AM",
+      "event": "OpsMind suggested Redis cache warmup runbook",
+      "type": "agent"
+    }
+  ],
+  "last_synced_at": "2026-09-29T13:27:49.203888Z"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "INC-709",
+  "duration_min": 0,
+  "error_type": "Push notifications delayed by up to 45 minutes for EU users.",
+  "incident_id": "INC-709",
+  "last_synced_at": "2026-09-29T13:27:48.879071Z",
+  "observations": [
+    "Apple APNS connection handshake timing out",
+    "Worker thread starvation under queue spike",
+    "Dead letter queue size reached 12,500 messages"
+  ],
+  "resolution": null,
+  "root_cause": null,
+  "service": "notification-worker",
+  "severity": "HIGH",
+  "started_at": "2026-09-28T22:38:36.155381Z",
+  "status": "unresolved investigation",
+  "symptom": "Push notifications delayed by up to 45 minutes for EU users.",
+  "symptoms": [
+    "Push notifications delayed by up to 45 minutes for EU users."
+  ],
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-709 recorded for notification-worker",
+      "type": "warning"
+    }
+  ],
+  "title": "notification-worker: Push notifications delayed by up to 45 minutes for EU users."
+}

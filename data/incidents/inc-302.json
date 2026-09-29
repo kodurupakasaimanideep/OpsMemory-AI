@@ -1,0 +1,35 @@
+{
+  "id": "INC-302",
+  "incident_id": "INC-302",
+  "title": "order-service: order requests are intermittently returning HTTP 504 during ",
+  "service": "order-service",
+  "status": "unresolved investigation",
+  "started_at": "2026-09-28T22:38:35.669491Z",
+  "severity": "HIGH",
+  "error_type": "order requests are intermittently returning HTTP 504 during peak traffic.",
+  "symptoms": [
+    "order requests are intermittently returning HTTP 504 during peak traffic."
+  ],
+  "observations": [
+    "CPU is normal",
+    "database latency is elevated",
+    "application logs show database query timeout",
+    "issue started after traffic increased"
+  ],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": null,
+  "resolution": null,
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-302 recorded for order-service",
+      "type": "warning"
+    }
+  ],
+  "symptom": "order requests are intermittently returning HTTP 504 during peak traffic.",
+  "last_synced_at": "2026-09-29T14:48:11.087348Z"
+}

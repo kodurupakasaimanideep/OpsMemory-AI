@@ -1,0 +1,32 @@
+{
+  "id": "INC-104",
+  "title": "Payment API 503 Cascading DB Pool Saturation",
+  "service": "Payment API",
+  "error_type": "HTTP 503",
+  "severity": "CRITICAL",
+  "status": "RESOLVED",
+  "started_at": "2026-08-14T08:15:00Z",
+  "resolved_at": "2026-08-14T08:33:00Z",
+  "duration_min": 18,
+  "deployment": {
+    "service": "payment-service",
+    "version": "v2.3.8",
+    "deployed_at": "2026-08-14T08:00:00Z",
+    "author": "payment-team@microtech.io"
+  },
+  "symptoms": [
+    "HTTP 503 errors on checkout endpoints",
+    "HikariCP connection pool exhausted (50/50 sockets)",
+    "API Gateway 504 gateway timeout cascade"
+  ],
+  "root_cause": "Database connection pool was exhausted after new async task spawned unbounded transactions without returning connections to the pool.",
+  "resolution": "Increased pool size from 50 to 100, merged connection leak hotfix, and restarted payment-service pods.",
+  "engineer_feedback": "Connection exhaustion was confirmed as the root cause. Increasing pool size provided instant buffer.",
+  "similarity_score": 0.92,
+  "telemetry": {
+    "cpu_percent": 45.0,
+    "memory_percent": 76.0,
+    "error_count": 3120,
+    "p99_latency_sec": 4.1
+  }
+}

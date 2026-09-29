@@ -1,0 +1,43 @@
+{
+  "id": "INC-204",
+  "title": "Payment API unavailable - HTTP 503 Spike",
+  "service": "Payment API",
+  "error_type": "HTTP 503",
+  "severity": "CRITICAL",
+  "status": "INVESTIGATING",
+  "started_at": "2026-09-28T10:32:00Z",
+  "duration_min": 14,
+  "deployment": {
+    "service": "payment-service",
+    "version": "v2.4.1",
+    "deployed_at": "2026-09-28T10:25:00Z",
+    "author": "dev-ops-eng@microtech.io",
+    "commit_hash": "c83f9a1",
+    "changes_summary": "Updated pool limits and asynchronous webhook dispatcher"
+  },
+  "symptoms": [
+    "API completely unavailable with 503 Service Unavailable",
+    "P99 Latency jumped to 3.8s from baseline 45ms",
+    "Database connection pool reported 0 available sockets (50/50 in use)",
+    "Payment checkout transactions dropping with gateway timeout"
+  ],
+  "telemetry": {
+    "cpu_percent": 41.2,
+    "memory_percent": 78.4,
+    "error_count": 2481,
+    "p99_latency_sec": 3.8,
+    "db_active_connections": 50,
+    "db_max_connections": 50
+  },
+  "logs_excerpt": [
+    "[2026-09-28 10:31:45] [ERROR] [payment-service] PoolAcquireTimeoutException: Timeout waiting for connection from pool (maxWait=5000ms)",
+    "[2026-09-28 10:31:48] [ERROR] [payment-service] org.postgresql.util.PSQLException: FATAL: remaining connection slots are reserved for non-replication superuser connections",
+    "[2026-09-28 10:32:01] [CRITICAL] [ingress-controller] Upstream service 'payment-service:8080' returned HTTP 503"
+  ],
+  "timeline": [
+    { "time": "10:25 AM", "event": "Deployment v2.4.1 rolled out to payment-service production pods", "type": "deploy" },
+    { "time": "10:29 AM", "event": "DB connection acquisition times began spiking to 4,800ms", "type": "warning" },
+    { "time": "10:32 AM", "event": "HTTP 503 threshold breached (>2% error rate). PagerDuty alert triggered", "type": "error" },
+    { "time": "10:33 AM", "event": "OpsMind AI Agent initiated automated root-cause memory search", "type": "agent" }
+  ]
+}

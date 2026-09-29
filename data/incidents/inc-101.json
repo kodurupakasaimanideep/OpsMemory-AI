@@ -1,0 +1,25 @@
+{
+  "id": "INC-101",
+  "deployment": {
+    "service": "payment-service",
+    "version": "v2.3.2"
+  },
+  "duration_min": 20,
+  "engineer_feedback": "Resolved by query routing and connection idle tuning.",
+  "error_type": "DB Timeout",
+  "last_synced_at": "2026-09-28T22:21:36.775883Z",
+  "resolution": "Rerouted analytic workloads to read replica and tuned connection pool idle timeout.",
+  "resolved_at": "2026-08-01T06:50:00Z",
+  "root_cause": "Long-running analytic queries running on primary write instance causing lock contention.",
+  "service": "Payment API",
+  "severity": "HIGH",
+  "similarity_score": 0.76,
+  "started_at": "2026-08-01T06:30:00Z",
+  "status": "RESOLVED",
+  "symptoms": [
+    "Database timeout on payment capture",
+    "Slow queries blocking write transactions",
+    "Connection queue length exceeded 100"
+  ],
+  "title": "Postgres Primary Database Timeout on Checkout"
+}

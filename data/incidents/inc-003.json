@@ -1,0 +1,27 @@
+{
+  "id": "INC-003",
+  "title": "Checkout Gateway HTTP 504 Downstream Partner Timeout",
+  "service": "Checkout Gateway",
+  "error_type": "HTTP 504 Gateway Timeout",
+  "severity": "HIGH",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T11:00:00Z",
+  "resolved_at": "2026-09-29T11:22:00Z",
+  "duration_min": 22,
+  "engineer": "Michael Torres",
+  "shift": "Day Shift (08:00 - 17:00)",
+  "deployment": {
+    "service": "checkout-gateway",
+    "version": "v3.1.0",
+    "deployed_at": "2026-09-28T18:00:00Z"
+  },
+  "symptoms": [
+    "HTTP 504 Gateway Timeout on checkout payment submission endpoints",
+    "Upstream thread pool exhaustion on API Gateway",
+    "Customer checkout abandonment spike of 45%"
+  ],
+  "root_cause": "Downstream payment processing provider experienced regional latency degradation, exhausting local connection threads due to lack of circuit breaker.",
+  "resolution": "Engaged circuit breaker fallback to secondary payment rail and tightened upstream timeout thresholds.",
+  "verification": "Checkout gateway latency normalized to 380ms, payment success rate recovered to 99.4%.",
+  "similarity_score": 0.84
+}

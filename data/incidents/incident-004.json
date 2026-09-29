@@ -1,0 +1,57 @@
+{
+  "id": "INC-004",
+  "title": "Notification Service OOMKilled Worker Pod CrashLoop",
+  "service": "Notification Service",
+  "error_type": "Kubernetes OOMKilled",
+  "severity": "MEDIUM",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T08:20:00Z",
+  "resolved_at": "2026-09-29T08:48:00Z",
+  "duration_min": 28,
+  "engineer": "Priya Sharma",
+  "shift": "Day Shift (08:00 - 17:00)",
+  "deployment": {
+    "service": "notification-service",
+    "version": "v1.4.1",
+    "deployed_at": "2026-09-29T08:00:00Z"
+  },
+  "symptoms": [
+    "Worker pods entering CrashLoopBackOff state repeatedly",
+    "Kubernetes container status OOMKilled (Exit Code 137)",
+    "Notification queue backlog accumulated 45,000 pending messages"
+  ],
+  "investigation_steps": [
+    "Retrieved pod termination events via kubectl describe pod",
+    "Analyzed JVM heap dump and native memory profiler traces",
+    "Identified unbounded byte buffer accumulation in PDF invoice attachment generator",
+    "Found unclosed file descriptors in temporary file generation routine"
+  ],
+  "findings": [
+    "Invoice generator was retaining unmanaged byte buffers in global scope",
+    "Each PDF attachment leaked approximately 8MB of RAM until pod exceeded 512Mi limit"
+  ],
+  "root_cause": "Memory leak caused by unmanaged byte buffer retention in PDF invoice rendering library during high-volume batch dispatch.",
+  "actions_taken": [
+    "Patched PDF generation logic to use streaming buffers with explicit cleanup",
+    "Temporarily bumped pod memory limit from 512Mi to 1Gi",
+    "Triggered manual worker pod rollout"
+  ],
+  "resolution": "Updated PDF rendering buffer context disposal, enforced garbage collection, and increased pod limit to 1Gi.",
+  "verification": "Pod memory consumption stabilized at 190Mi under 10,000 notifications/min load with zero pod restarts.",
+  "recommendations": [
+    "Implement container memory leak synthetic soak tests in staging pipeline",
+    "Add Prometheus alert for pod memory utilization > 80% with positive rate of change"
+  ],
+  "engineer_feedback": "Memory leak hotfix verified stable across all 6 notification worker replicas.",
+  "similarity_score": 0.82,
+  "telemetry": {
+    "cpu_percent": 42.1,
+    "memory_percent": 99.8,
+    "error_count": 520,
+    "p99_latency_sec": 3.1
+  },
+  "logs_excerpt": [
+    "2026-09-29T08:20:14Z WARN  [kubelet] Container notification-worker exceeded memory limit (512Mi)",
+    "2026-09-29T08:20:15Z ERROR [kubernetes] Pod notification-worker-7df94-xk29j killed (OOMKilled: 137)"
+  ]
+}

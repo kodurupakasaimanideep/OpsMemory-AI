@@ -1,0 +1,2158 @@
+{
+  "categories": {
+    "incidents": 2557,
+    "root_causes": 772,
+    "resolutions": 950,
+    "runbooks": 182,
+    "deployment_patterns": 421
+  },
+  "recently_learned": [
+    {
+      "id": "learn_inc-888",
+      "title": "Solar flare geomagnetic storm induced ionospheric scintillation",
+      "learned_from": "INC-888",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-888"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Switched downlink frequency band to Ka-1 backup transponder and recalibrated phase lock loop",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "satellite-telemetry-gateway",
+      "error_type": "Ground station carrier phase lock lost on transponder band Ku-4."
+    },
+    {
+      "id": "learn_inc-550",
+      "title": "Database connection pool saturated under concurrent peak checkout checkout traffic post-deployment v2.4.1",
+      "learned_from": "INC-550",
+      "related_incidents_count": 2,
+      "related_incidents": [
+        "INC-204",
+        "INC-550"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Increased connection pool size to 65 sockets, tuned idle reaper to 30s, and restarted payment-service pods",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Payment API",
+      "error_type": "HTTP 503"
+    },
+    {
+      "id": "learn_inc-hs-live-test-001",
+      "title": "Database connection pool exhausted under concurrent checkout traffic (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+      "learned_from": "INC-HS-LIVE-TEST-001",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-HS-LIVE-TEST-001"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Increased pool size to 65 and tuned connection reaper (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Payment API",
+      "error_type": "payment API failures caused by database connection pool exhaustion (OPSMIND_HINDSIGHT_LIVE_TEST_001)"
+    },
+    {
+      "id": "learn_inc-990",
+      "title": "NTP time drift caused Raft leader lease expiration across AZs",
+      "learned_from": "INC-990",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-990"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Synchronized chrony NTP daemon and increased election timeout to 1500ms",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "quantum-ledger-service",
+      "error_type": "Cryptographic state synchronization failure across consensus nodes."
+    },
+    {
+      "id": "learn_inc-204",
+      "title": "Database connection pool exhausted under concurrent checkout traffic",
+      "learned_from": "INC-204",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-204"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Increased pool size to 50 connections and tuned idle connection reaper",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Payment API",
+      "error_type": "HTTP 503"
+    },
+    {
+      "id": "learn_inc-995",
+      "title": "Disk journal flush synchronization verified in SQLite WAL mode",
+      "learned_from": "INC-995",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-995"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Applied WAL mode persistence to opsmind.db and verified on restart",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "persistence-audit-service",
+      "error_type": "Disk write durability audit test."
+    },
+    {
+      "id": "learn_inc-hs-test-01",
+      "title": "Worker acknowledgement transaction was not committed after a retry path in order message consumer.",
+      "learned_from": "INC-HS-TEST-01",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-HS-TEST-01"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Commit transaction before acknowledgement and restart affected order consumer workers.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Order Processing Service",
+      "error_type": "Transaction Acknowledgement Hang"
+    },
+    {
+      "id": "learn_inc-real-05",
+      "title": "Key prefix mismatch in v3.2.0 cache key generator caused 88% cache miss rate.",
+      "learned_from": "INC-REAL-05",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-REAL-05"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Patched cache key generator in v3.2.1 and warmed token cache.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Auth Service",
+      "error_type": "High Latency & Token Validation Delay"
+    },
+    {
+      "id": "learn_inc-real-03",
+      "title": "Downstream SMS partner endpoint latency exceeded max.poll.interval.ms, triggering Kafka consumer heartbeat timeouts and rebalance loop.",
+      "learned_from": "INC-REAL-03",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-REAL-03"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Increased max.poll.interval.ms from 60s to 300s and offloaded SMS dispatch to async background thread pool.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Notification Service",
+      "error_type": "Kafka Consumer Rebalance Stall"
+    },
+    {
+      "id": "learn_inc-real-02",
+      "title": "Database CPU and I/O overload caused by unindexed analytical reporting query executing against primary database replica.",
+      "learned_from": "INC-REAL-02",
+      "related_incidents_count": 3,
+      "related_incidents": [
+        "INC-001",
+        "INC-002",
+        "INC-REAL-02"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Terminated blocking query PID 44102, added index on ledger_transactions(merchant_id, created_at), and redirected reporting queries to read replica.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Payment API",
+      "error_type": "Database Connection Timeout"
+    },
+    {
+      "id": "learn_inc-real-01",
+      "title": "Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client disconnect).",
+      "learned_from": "INC-REAL-01",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-REAL-01"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Restarted affected worker processes and deployed connection-pool context manager fix in v2.4.2 hotfix.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Payment API",
+      "error_type": "HTTP 500 & Connection Timeout"
+    },
+    {
+      "id": "learn_inc-test-01",
+      "title": "Unreleased socket in billing worker thread",
+      "learned_from": "INC-TEST-01",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-TEST-01"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Increased thread pool and added socket context manager",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "billing-api",
+      "error_type": "Unknown Error"
+    },
+    {
+      "id": "learn_inc-403",
+      "title": "Async webhook dispatcher thread pool exhausted due to blocking external API calls.",
+      "learned_from": "INC-403",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-403"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Configured non-blocking HTTP client and increased worker threads from 20 to 50.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "billing-service",
+      "error_type": "Unknown Error"
+    },
+    {
+      "id": "learn_inc-402",
+      "title": "Unindexed foreign key lookups starved PostgreSQL connection pool.",
+      "learned_from": "INC-402",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-402"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Added btree index on orders(user_id) and scaled PgBouncer pool to 100.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "order-service",
+      "error_type": "Unknown Error"
+    },
+    {
+      "id": "learn_inc-004",
+      "title": "Memory leak caused by unmanaged byte buffer retention in PDF invoice rendering library during high-volume batch dispatch.",
+      "learned_from": "INC-004",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-004"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Updated PDF rendering buffer context disposal, enforced garbage collection, and increased pod limit to 1Gi.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Notification Service",
+      "error_type": "Kubernetes OOMKilled"
+    },
+    {
+      "id": "learn_inc-003",
+      "title": "Downstream payment processing provider experienced regional latency degradation, exhausting local connection threads.",
+      "learned_from": "INC-003",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-003"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Engaged circuit breaker fallback to secondary payment rail and tightened upstream timeout thresholds.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Checkout Gateway",
+      "error_type": "HTTP 504 Gateway Timeout"
+    },
+    {
+      "id": "learn_inc-002",
+      "title": "Database CPU and I/O overload caused by unindexed analytical reporting query executing against primary database replica.",
+      "learned_from": "INC-002",
+      "related_incidents_count": 2,
+      "related_incidents": [
+        "INC-001",
+        "INC-002"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Terminated blocking query, added index on ledger_transactions, and redirected analytical traffic to read replica.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Payment API",
+      "error_type": "Database Connection Timeout"
+    },
+    {
+      "id": "learn_inc-001",
+      "title": "Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client disconnect).",
+      "learned_from": "INC-001",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-001"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Restarted affected worker processes and deployed connection-pool context manager fix in v2.4.2.",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Payment API",
+      "error_type": "Database Connection Timeout"
+    },
+    {
+      "id": "learn_inc-207",
+      "title": "Batch processing duration exceeded max.poll.interval.ms, causing Kafka consumer rebalance storm",
+      "learned_from": "INC-207",
+      "related_incidents_count": 1,
+      "related_incidents": [
+        "INC-207"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Increased max.poll.interval.ms to 300,000ms and reduced max.poll.records to 250 in worker config",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.96,
+      "last_updated": "Just now",
+      "service": "Notification Service",
+      "error_type": "Consumer Lag & Rebalance Storm"
+    },
+    {
+      "id": "learn_001",
+      "title": "Database connection exhaustion",
+      "learned_from": "INC-204",
+      "related_incidents_count": 7,
+      "related_incidents": [
+        "INC-104",
+        "INC-117",
+        "INC-121",
+        "INC-119",
+        "INC-101",
+        "INC-204"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Increasing pool",
+          "resolved_count": 4
+        },
+        {
+          "action": "Rollback",
+          "resolved_count": 3
+        }
+      ],
+      "confidence": 0.94,
+      "last_updated": "Just now",
+      "service": "Payment API",
+      "error_type": "HTTP 503"
+    },
+    {
+      "id": "learn_002",
+      "title": "Redis Cache Invalidation Desync",
+      "learned_from": "INC-206",
+      "related_incidents_count": 3,
+      "related_incidents": [
+        "INC-206",
+        "INC-002"
+      ],
+      "resolution_stats": [
+        {
+          "action": "Cache warmup script",
+          "resolved_count": 2
+        },
+        {
+          "action": "Key TTL reset",
+          "resolved_count": 1
+        }
+      ],
+      "confidence": 0.88,
+      "last_updated": "1 hour ago",
+      "service": "Auth Service",
+      "error_type": "High latency"
+    }
+  ],
+  "learned_patterns": {
+    "payment-service:HTTP 503": {
+      "root_cause": "Database connection pool was exhausted",
+      "resolution": "Rollback deployment + increase connection pool + restart affected service",
+      "incidents": [
+        "INC-104",
+        "INC-117",
+        "INC-121",
+        "INC-119"
+      ],
+      "reinforcements": 5
+    },
+    "order-service:DB timeout": {
+      "root_cause": "Unindexed queries combined with tight connection pool limits",
+      "resolution": "Rollback deployment and tune PgBouncer connection pool size",
+      "incidents": [
+        "INC-117",
+        "INC-101"
+      ],
+      "reinforcements": 3
+    },
+    "notification service:consumer lag & rebalance storm": {
+      "root_cause": "Batch processing duration exceeded max.poll.interval.ms, causing Kafka consumer rebalance storm",
+      "resolution": "Increased max.poll.interval.ms to 300,000ms and reduced max.poll.records to 250 in worker config",
+      "incidents": [
+        "INC-207"
+      ],
+      "reinforcements": 1
+    },
+    "payment api:http 503": {
+      "root_cause": "Database connection pool saturated under concurrent peak checkout checkout traffic post-deployment v2.4.1",
+      "resolution": "Increased connection pool size to 65 sockets, tuned idle reaper to 30s, and restarted payment-service pods",
+      "incidents": [
+        "INC-204",
+        "INC-550"
+      ],
+      "reinforcements": 10
+    },
+    "order-service:unknown error": {
+      "root_cause": "Unindexed foreign key lookups starved PostgreSQL connection pool.",
+      "resolution": "Added btree index on orders(user_id) and scaled PgBouncer pool to 100.",
+      "incidents": [
+        "INC-402"
+      ],
+      "reinforcements": 2
+    },
+    "billing-service:unknown error": {
+      "root_cause": "Async webhook dispatcher thread pool exhausted due to blocking external API calls.",
+      "resolution": "Configured non-blocking HTTP client and increased worker threads from 20 to 50.",
+      "incidents": [
+        "INC-403"
+      ],
+      "reinforcements": 2
+    },
+    "payment api:database connection timeout": {
+      "root_cause": "Database CPU and I/O overload caused by unindexed analytical reporting query executing against primary database replica.",
+      "resolution": "Terminated blocking query PID 44102, added index on ledger_transactions(merchant_id, created_at), and redirected reporting queries to read replica.",
+      "incidents": [
+        "INC-001",
+        "INC-002",
+        "INC-REAL-02"
+      ],
+      "reinforcements": 3
+    },
+    "checkout gateway:http 504 gateway timeout": {
+      "root_cause": "Downstream payment processing provider experienced regional latency degradation, exhausting local connection threads.",
+      "resolution": "Engaged circuit breaker fallback to secondary payment rail and tightened upstream timeout thresholds.",
+      "incidents": [
+        "INC-003"
+      ],
+      "reinforcements": 1
+    },
+    "notification service:kubernetes oomkilled": {
+      "root_cause": "Memory leak caused by unmanaged byte buffer retention in PDF invoice rendering library during high-volume batch dispatch.",
+      "resolution": "Updated PDF rendering buffer context disposal, enforced garbage collection, and increased pod limit to 1Gi.",
+      "incidents": [
+        "INC-004"
+      ],
+      "reinforcements": 1
+    },
+    "billing-api:unknown error": {
+      "root_cause": "Unreleased socket in billing worker thread",
+      "resolution": "Increased thread pool and added socket context manager",
+      "incidents": [
+        "INC-TEST-01"
+      ],
+      "reinforcements": 2
+    },
+    "payment api:http 500 & connection timeout": {
+      "root_cause": "Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client disconnect).",
+      "resolution": "Restarted affected worker processes and deployed connection-pool context manager fix in v2.4.2 hotfix.",
+      "incidents": [
+        "INC-REAL-01"
+      ],
+      "reinforcements": 1
+    },
+    "notification service:kafka consumer rebalance stall": {
+      "root_cause": "Downstream SMS partner endpoint latency exceeded max.poll.interval.ms, triggering Kafka consumer heartbeat timeouts and rebalance loop.",
+      "resolution": "Increased max.poll.interval.ms from 60s to 300s and offloaded SMS dispatch to async background thread pool.",
+      "incidents": [
+        "INC-REAL-03"
+      ],
+      "reinforcements": 1
+    },
+    "auth service:high latency & token validation delay": {
+      "root_cause": "Key prefix mismatch in v3.2.0 cache key generator caused 88% cache miss rate.",
+      "resolution": "Patched cache key generator in v3.2.1 and warmed token cache.",
+      "incidents": [
+        "INC-REAL-05"
+      ],
+      "reinforcements": 1
+    },
+    "order processing service:transaction acknowledgement hang": {
+      "root_cause": "Worker acknowledgement transaction was not committed after a retry path in order message consumer.",
+      "resolution": "Commit transaction before acknowledgement and restart affected order consumer workers.",
+      "incidents": [
+        "INC-HS-TEST-01"
+      ],
+      "reinforcements": 1
+    },
+    "quantum-ledger-service:cryptographic state synchronization failure across consensus nodes.": {
+      "root_cause": "NTP time drift caused Raft leader lease expiration across AZs",
+      "resolution": "Synchronized chrony NTP daemon and increased election timeout to 1500ms",
+      "incidents": [
+        "INC-990"
+      ],
+      "reinforcements": 3
+    },
+    "persistence-audit-service:disk write durability audit test.": {
+      "root_cause": "Disk journal flush synchronization verified in SQLite WAL mode",
+      "resolution": "Applied WAL mode persistence to opsmind.db and verified on restart",
+      "incidents": [
+        "INC-995"
+      ],
+      "reinforcements": 2
+    },
+    "satellite-telemetry-gateway:ground station carrier phase lock lost on transponder band ku-4.": {
+      "root_cause": "Solar flare geomagnetic storm induced ionospheric scintillation",
+      "resolution": "Switched downlink frequency band to Ka-1 backup transponder and recalibrated phase lock loop",
+      "incidents": [
+        "INC-888"
+      ],
+      "reinforcements": 4
+    },
+    "payment api:payment api failures caused by database connection pool exhaustion (opsmind_hindsight_live_test_001)": {
+      "root_cause": "Database connection pool exhausted under concurrent checkout traffic (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+      "resolution": "Increased pool size to 65 and tuned connection reaper (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+      "incidents": [
+        "INC-HS-LIVE-TEST-001"
+      ],
+      "reinforcements": 1
+    }
+  },
+  "incidents_memory": {
+    "INC-301": {
+      "id": "INC-301",
+      "incident_id": "INC-301",
+      "title": "payment-service: payment requests are intermittently returning HTTP 503 durin",
+      "service": "payment-service",
+      "status": "unresolved investigation",
+      "started_at": "2026-09-28T22:38:35.980548Z",
+      "severity": "HIGH",
+      "error_type": "payment requests are intermittently returning HTTP 503 during peak traffic.",
+      "symptoms": [
+        "payment requests are intermittently returning HTTP 503 during peak traffic."
+      ],
+      "observations": [
+        "CPU is normal",
+        "database connections are near the configured limit",
+        "application logs show connection acquisition timeout",
+        "issue started after traffic increased"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-301 recorded for payment-service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "payment requests are intermittently returning HTTP 503 during peak traffic.",
+      "last_synced_at": "2026-09-29T14:48:11.168146Z"
+    },
+    "INC-302": {
+      "id": "INC-302",
+      "incident_id": "INC-302",
+      "title": "order-service: order requests are intermittently returning HTTP 504 during ",
+      "service": "order-service",
+      "status": "unresolved investigation",
+      "started_at": "2026-09-28T22:38:35.669491Z",
+      "severity": "HIGH",
+      "error_type": "order requests are intermittently returning HTTP 504 during peak traffic.",
+      "symptoms": [
+        "order requests are intermittently returning HTTP 504 during peak traffic."
+      ],
+      "observations": [
+        "CPU is normal",
+        "database latency is elevated",
+        "application logs show database query timeout",
+        "issue started after traffic increased"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-302 recorded for order-service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "order requests are intermittently returning HTTP 504 during peak traffic.",
+      "last_synced_at": "2026-09-29T14:48:11.087348Z"
+    },
+    "INC-502": {
+      "id": "INC-502",
+      "incident_id": "INC-502",
+      "title": "auth-service: OAuth token validation requests returning HTTP 500 during de",
+      "service": "auth-service",
+      "status": "unresolved investigation",
+      "started_at": "2026-09-28T22:33:47.255827Z",
+      "severity": "HIGH",
+      "error_type": "OAuth token validation requests returning HTTP 500 during deployment rollover.",
+      "symptoms": [
+        "OAuth token validation requests returning HTTP 500 during deployment rollover."
+      ],
+      "observations": [
+        "Token introspection cache hit ratio dropped to 12%",
+        "Redis latency spiked to 850ms",
+        "Application connection pool exhausted"
+      ],
+      "root_cause": "unknown / not determined",
+      "resolution": "none",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-502 recorded for auth-service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "OAuth token validation requests returning HTTP 500 during deployment rollover.",
+      "last_synced_at": "2026-09-28T22:33:47.256831Z"
+    },
+    "INC-709": {
+      "id": "INC-709",
+      "duration_min": 0,
+      "error_type": "Push notifications delayed by up to 45 minutes for EU users.",
+      "incident_id": "INC-709",
+      "last_synced_at": "2026-09-29T13:27:48.879071Z",
+      "observations": [
+        "Apple APNS connection handshake timing out",
+        "Worker thread starvation under queue spike",
+        "Dead letter queue size reached 12,500 messages"
+      ],
+      "resolution": null,
+      "root_cause": null,
+      "service": "notification-worker",
+      "severity": "HIGH",
+      "started_at": "2026-09-28T22:38:36.155381Z",
+      "status": "unresolved investigation",
+      "symptom": "Push notifications delayed by up to 45 minutes for EU users.",
+      "symptoms": [
+        "Push notifications delayed by up to 45 minutes for EU users."
+      ],
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-709 recorded for notification-worker",
+          "type": "warning"
+        }
+      ],
+      "title": "notification-worker: Push notifications delayed by up to 45 minutes for EU users."
+    },
+    "INC-104": {
+      "id": "INC-104",
+      "title": "Payment API 503 Cascading DB Pool Saturation",
+      "service": "Payment API",
+      "error_type": "HTTP 503",
+      "severity": "CRITICAL",
+      "status": "RESOLVED",
+      "started_at": "2026-08-14T08:15:00Z",
+      "resolved_at": "2026-08-14T08:33:00Z",
+      "duration_min": 18,
+      "deployment": {
+        "service": "payment-service",
+        "version": "v2.3.8",
+        "deployed_at": "2026-08-14T08:00:00Z",
+        "author": "payment-team@microtech.io"
+      },
+      "symptoms": [
+        "HTTP 503 errors on checkout endpoints",
+        "HikariCP connection pool exhausted (50/50 sockets)",
+        "API Gateway 504 gateway timeout cascade"
+      ],
+      "root_cause": "Database connection pool was exhausted after new async task spawned unbounded transactions without returning connections to the pool.",
+      "resolution": "Increased pool size from 50 to 100, merged connection leak hotfix, and restarted payment-service pods.",
+      "engineer_feedback": "Connection exhaustion was confirmed as the root cause. Increasing pool size provided instant buffer.",
+      "similarity_score": 0.92,
+      "telemetry": {
+        "cpu_percent": 45.0,
+        "memory_percent": 76.0,
+        "error_count": 3120,
+        "p99_latency_sec": 4.1
+      },
+      "last_synced_at": "2026-09-29T13:27:49.050451Z"
+    },
+    "INC-117": {
+      "id": "INC-117",
+      "title": "Order Service DB Pool Starvation after Deploy v1.9.4",
+      "service": "Order Service",
+      "error_type": "HTTP 500 / DB Timeout",
+      "severity": "HIGH",
+      "status": "RESOLVED",
+      "started_at": "2026-08-28T14:10:00Z",
+      "resolved_at": "2026-08-28T14:26:00Z",
+      "duration_min": 16,
+      "deployment": {
+        "service": "order-service",
+        "version": "v1.9.4",
+        "deployed_at": "2026-08-28T14:02:00Z"
+      },
+      "symptoms": [
+        "Order creation latency spiked over 5s",
+        "Database timeout on Postgres write replicas",
+        "Connection queue backed up with 180 waiting threads"
+      ],
+      "root_cause": "Unindexed foreign key query combined with default max_connections=40 starved pool on surge traffic.",
+      "resolution": "Rolled back deployment v1.9.4 and increased PostgreSQL connection pool limits to 120 sockets.",
+      "engineer_feedback": "Rollback and pool increase quickly restored order placement SLAs.",
+      "similarity_score": 0.87,
+      "telemetry": {
+        "cpu_percent": 68.0,
+        "memory_percent": 82.0,
+        "error_count": 1840,
+        "p99_latency_sec": 5.2
+      },
+      "last_synced_at": "2026-09-29T13:27:49.076325Z"
+    },
+    "INC-204": {
+      "id": "INC-204",
+      "title": "Payment API unavailable - HTTP 503 Spike",
+      "service": "Payment API",
+      "error_type": "HTTP 503",
+      "severity": "CRITICAL",
+      "status": "RESOLVED",
+      "started_at": "2026-09-28T10:32:00Z",
+      "duration_min": 14,
+      "deployment": {
+        "service": "payment-service",
+        "version": "v2.4.1",
+        "deployed_at": "2026-09-28T10:25:00Z",
+        "author": "dev-ops-eng@microtech.io",
+        "commit_hash": "c83f9a1",
+        "changes_summary": "Updated pool limits and asynchronous webhook dispatcher"
+      },
+      "symptoms": [
+        "API completely unavailable with 503 Service Unavailable",
+        "P99 Latency jumped to 3.8s from baseline 45ms",
+        "Database connection pool reported 0 available sockets (50/50 in use)",
+        "Payment checkout transactions dropping with gateway timeout"
+      ],
+      "telemetry": {
+        "cpu_percent": 41.2,
+        "memory_percent": 78.4,
+        "error_count": 2481,
+        "p99_latency_sec": 3.8,
+        "db_active_connections": 50,
+        "db_max_connections": 50
+      },
+      "logs_excerpt": [
+        "[2026-09-28 10:31:45] [ERROR] [payment-service] PoolAcquireTimeoutException: Timeout waiting for connection from pool (maxWait=5000ms)",
+        "[2026-09-28 10:31:48] [ERROR] [payment-service] org.postgresql.util.PSQLException: FATAL: remaining connection slots are reserved for non-replication superuser connections",
+        "[2026-09-28 10:32:01] [CRITICAL] [ingress-controller] Upstream service 'payment-service:8080' returned HTTP 503"
+      ],
+      "timeline": [
+        {
+          "time": "10:25 AM",
+          "event": "Deployment v2.4.1 rolled out to payment-service production pods",
+          "type": "deploy"
+        },
+        {
+          "time": "10:29 AM",
+          "event": "DB connection acquisition times began spiking to 4,800ms",
+          "type": "warning"
+        },
+        {
+          "time": "10:32 AM",
+          "event": "HTTP 503 threshold breached (>2% error rate). PagerDuty alert triggered",
+          "type": "error"
+        },
+        {
+          "time": "10:33 AM",
+          "event": "OpsMind AI Agent initiated automated root-cause memory search",
+          "type": "agent"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Database connection pool exhausted under concurrent checkout traffic",
+          "type": "resolved"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Database connection pool exhausted under concurrent checkout traffic",
+          "type": "resolved"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Database connection pool exhausted under concurrent checkout traffic",
+          "type": "resolved"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Database connection pool exhausted under concurrent checkout traffic",
+          "type": "resolved"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Database connection pool exhausted under concurrent checkout traffic",
+          "type": "resolved"
+        }
+      ],
+      "last_synced_at": "2026-09-29T14:55:01.349209Z",
+      "resolved_at": "2026-09-29T14:55:01.345415Z",
+      "root_cause": "Database connection pool exhausted under concurrent checkout traffic",
+      "resolution": "Increased pool size to 50 connections and tuned idle connection reaper",
+      "engineer_feedback": "Tested in load stage and verified zero connection timeouts"
+    },
+    "INC-303": {
+      "id": "INC-303",
+      "duration_min": 0,
+      "error_type": "inventory requests are intermittently returning HTTP 502 during peak traffic.",
+      "incident_id": "INC-303",
+      "last_synced_at": "2026-09-28T22:47:42.121702Z",
+      "observations": [
+        "CPU is normal",
+        "Redis latency is elevated",
+        "application logs show upstream timeout",
+        "issue started after a recent deployment"
+      ],
+      "resolution": null,
+      "root_cause": null,
+      "service": "inventory-service",
+      "severity": "HIGH",
+      "started_at": "2026-09-28T22:47:42.117623Z",
+      "status": "INVESTIGATING",
+      "symptom": "inventory requests are intermittently returning HTTP 502 during peak traffic.",
+      "symptoms": [
+        "inventory requests are intermittently returning HTTP 502 during peak traffic."
+      ],
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-303 recorded for inventory-service",
+          "type": "warning"
+        }
+      ],
+      "title": "inventory-service: inventory requests are intermittently returning HTTP 502 dur"
+    },
+    "INC-304": {
+      "id": "INC-304",
+      "duration_min": 0,
+      "error_type": "checkout transactions intermittently failing with HTTP 504 gateway timeout during flash sale.",
+      "incident_id": "INC-304",
+      "last_synced_at": "2026-09-28T22:48:04.116262Z",
+      "observations": [
+        "Database connection pool saturated",
+        "Payment provider webhook processing delay reached 8500ms",
+        "Network packet drops observed on egress interface eth0",
+        "Spike in 504 errors began at 14:00 UTC during traffic surge"
+      ],
+      "resolution": null,
+      "root_cause": null,
+      "service": "checkout-gateway",
+      "severity": "HIGH",
+      "started_at": "2026-09-28T22:48:04.115070Z",
+      "status": "INVESTIGATING",
+      "symptom": "checkout transactions intermittently failing with HTTP 504 gateway timeout during flash sale.",
+      "symptoms": [
+        "checkout transactions intermittently failing with HTTP 504 gateway timeout during flash sale."
+      ],
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-304 recorded for checkout-gateway",
+          "type": "warning"
+        }
+      ],
+      "title": "checkout-gateway: checkout transactions intermittently failing with HTTP 504 g"
+    },
+    "INC-001": {
+      "id": "INC-001",
+      "title": "Payment API Database Connection Timeout",
+      "service": "Payment API",
+      "error_type": "Database Connection Timeout",
+      "severity": "CRITICAL",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T09:15:00Z",
+      "resolved_at": "2026-09-29T09:42:00Z",
+      "duration_min": 27,
+      "engineer": "Alex Rivera",
+      "shift": "Day Shift (08:00 - 17:00)",
+      "deployment": {
+        "service": "payment-service",
+        "version": "v2.4.2",
+        "deployed_at": "2026-09-29T09:00:00Z",
+        "author": "alex@microtech.io"
+      },
+      "symptoms": [
+        "Database connection pool saturated (50/50 sockets)",
+        "HTTP 503 Service Unavailable on /api/v1/payments",
+        "Payment callback queue backlog exceeded 15,000 tasks",
+        "Gateway timeout on payment webhook processing"
+      ],
+      "investigation_steps": [
+        "Checked Postgres active connections in pg_stat_activity",
+        "Inspected uvicorn worker pool memory and socket descriptors",
+        "Identified unclosed DB session in payment_webhook_callback handler",
+        "Verified database server CPU and IOPS were under 35%"
+      ],
+      "findings": [
+        "Database server itself was healthy and responsive",
+        "Application worker processes were failing to return connection handles to pool",
+        "Connection leak triggered whenever client disconnected prematurely during webhook processing"
+      ],
+      "root_cause": "Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client timeout/disconnect).",
+      "actions_taken": [
+        "Gracefully restarted affected payment worker pods",
+        "Deployed hotfix v2.4.2 wrapping db_session in try-finally context manager",
+        "Flushed webhook retry queue"
+      ],
+      "resolution": "Restarted affected worker processes and deployed connection-pool context manager fix in v2.4.2.",
+      "verification": "Error rate returned to 0.01%, active DB connections stabilized at 12/50 under full production load.",
+      "recommendations": [
+        "Enforce connection pool timeout ceiling of 5 seconds in PgBouncer",
+        "Add automated alert for unclosed connection pool sockets > 80%"
+      ],
+      "engineer_feedback": "Hotfix v2.4.2 stabilized the connection pool. Night shift should monitor connection counts during scheduled 22:00 batch.",
+      "similarity_score": 0.96,
+      "telemetry": {
+        "cpu_percent": 34.2,
+        "memory_percent": 68.1,
+        "error_count": 1420,
+        "p99_latency_sec": 4.8,
+        "db_active_connections": 50,
+        "db_max_connections": 50
+      },
+      "logs_excerpt": [
+        "2026-09-29T09:15:12Z ERROR [payment-service] sqlalchemy.exc.TimeoutError: QueuePool limit of size 50 overflow 10 reached",
+        "2026-09-29T09:15:18Z WARN  [gateway] upstream payment-service timed out after 5000ms",
+        "2026-09-29T09:16:04Z ERROR [payment-service] unhandled client disconnect left connection socket #42 open"
+      ],
+      "last_synced_at": "2026-09-29T13:27:48.905615Z"
+    },
+    "INC-002": {
+      "id": "INC-002",
+      "title": "Payment API Database Overload via Unindexed Batch Query",
+      "service": "Payment API",
+      "error_type": "Database Connection Timeout",
+      "severity": "HIGH",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T14:10:00Z",
+      "resolved_at": "2026-09-29T14:35:00Z",
+      "duration_min": 25,
+      "engineer": "Sarah Chen",
+      "shift": "Day Shift (08:00 - 17:00)",
+      "deployment": {
+        "service": "reporting-worker",
+        "version": "v1.8.0",
+        "deployed_at": "2026-09-29T14:00:00Z"
+      },
+      "symptoms": [
+        "Postgres connection timeouts across all API clients",
+        "Database server CPU pegged at 98%",
+        "p99 latency spiked to 6.8s on primary read/write node",
+        "IOPS ceiling reached on primary storage volume"
+      ],
+      "investigation_steps": [
+        "Queried pg_stat_activity for longest running queries",
+        "Discovered full table scan query on 14M rows in ledger_transactions table",
+        "Confirmed application worker pool was NOT leaking sockets",
+        "Identified new reporting batch cron triggered on primary rather than read-replica"
+      ],
+      "findings": [
+        "Root cause is database engine CPU & I/O overload, NOT a connection leak in application code",
+        "Worker connection pool saturated because database server was unable to service queries fast enough"
+      ],
+      "root_cause": "Database CPU and I/O overload caused by unindexed analytical reporting query executing against primary database replica.",
+      "actions_taken": [
+        "Terminated long-running reporting query process (PID 44102)",
+        "Added composite index on ledger_transactions(merchant_id, created_at)",
+        "Redirected reporting-worker connection string to read-only replica endpoint"
+      ],
+      "resolution": "Terminated blocking query, added index on ledger_transactions, and redirected analytical traffic to read replica.",
+      "verification": "Database CPU dropped from 98% to 18%, p99 latency returned to 45ms, and connection pool backlog cleared immediately.",
+      "recommendations": [
+        "Enforce read-replica routing for all automated reporting and reconciliation queries",
+        "Configure statement_timeout = '30s' on primary database"
+      ],
+      "engineer_feedback": "Important distinction: Even though symptom was DB connection timeout, cause was DB server overload from batch query, not a worker leak.",
+      "similarity_score": 0.89,
+      "telemetry": {
+        "cpu_percent": 98.4,
+        "memory_percent": 84.2,
+        "error_count": 890,
+        "p99_latency_sec": 6.8,
+        "db_active_connections": 50,
+        "db_max_connections": 50
+      },
+      "logs_excerpt": [
+        "2026-09-29T14:10:05Z WARN  [postgres] slow query: SELECT * FROM ledger_transactions WHERE status='PENDING' (duration: 42300ms)",
+        "2026-09-29T14:10:20Z ERROR [payment-service] connection pool timeout waiting for connection from pool"
+      ],
+      "last_synced_at": "2026-09-29T13:27:48.934502Z"
+    },
+    "INC-101": {
+      "id": "INC-101",
+      "title": "Postgres Primary Database Timeout on Checkout",
+      "service": "Payment API",
+      "error_type": "DB Timeout",
+      "severity": "HIGH",
+      "status": "RESOLVED",
+      "started_at": "2026-08-01T06:30:00Z",
+      "resolved_at": "2026-08-01T06:50:00Z",
+      "duration_min": 20,
+      "deployment": {
+        "service": "payment-service",
+        "version": "v2.3.2"
+      },
+      "symptoms": [
+        "Database timeout on payment capture",
+        "Slow queries blocking write transactions",
+        "Connection queue length exceeded 100"
+      ],
+      "root_cause": "Long-running analytic queries running on primary write instance causing lock contention.",
+      "resolution": "Rerouted analytic workloads to read replica and tuned connection pool idle timeout.",
+      "engineer_feedback": "Resolved by query routing and connection idle tuning.",
+      "similarity_score": 0.76
+    },
+    "INC-003": {
+      "id": "INC-003",
+      "title": "Checkout Gateway HTTP 504 Downstream Partner Timeout",
+      "service": "Checkout Gateway",
+      "error_type": "HTTP 504 Gateway Timeout",
+      "severity": "HIGH",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T11:00:00Z",
+      "resolved_at": "2026-09-29T11:22:00Z",
+      "duration_min": 22,
+      "engineer": "Michael Torres",
+      "shift": "Day Shift (08:00 - 17:00)",
+      "deployment": {
+        "service": "checkout-gateway",
+        "version": "v3.1.0",
+        "deployed_at": "2026-09-28T18:00:00Z"
+      },
+      "symptoms": [
+        "HTTP 504 Gateway Timeout on checkout payment submission endpoints",
+        "Upstream thread pool exhaustion on API Gateway",
+        "Customer checkout abandonment spike of 45%"
+      ],
+      "investigation_steps": [
+        "Analyzed distributed trace spans in OpenTelemetry collector",
+        "Identified 94% of latency spent in external HTTP call to third-party card processing partner",
+        "Confirmed internal application database and cache response times were normal (< 12ms)",
+        "Checked partner status dashboard and confirmed regional degradation"
+      ],
+      "findings": [
+        "Internal microservices were healthy",
+        "Downstream card processor API was taking 14+ seconds per authorization request without failing fast"
+      ],
+      "root_cause": "Downstream payment processing provider experienced regional latency degradation, exhausting local connection threads due to lack of circuit breaker.",
+      "actions_taken": [
+        "Tripped circuit breaker to divert payments to secondary payment rail (Acquirer B)",
+        "Lowered upstream partner HTTP timeout from 15s to 2.5s",
+        "Enabled asynchronous payment authorization polling"
+      ],
+      "resolution": "Engaged circuit breaker fallback to secondary payment rail and tightened upstream timeout thresholds.",
+      "verification": "Checkout gateway latency normalized to 380ms, payment success rate recovered to 99.4%.",
+      "recommendations": [
+        "Automate multi-rail active-active payment routing based on rolling p95 latency",
+        "Implement exponential backoff retry on transient gateway 504 errors"
+      ],
+      "engineer_feedback": "Secondary payment rail handled 100% of volume seamlessly once circuit breaker was manually tripped.",
+      "similarity_score": 0.84,
+      "telemetry": {
+        "cpu_percent": 28.5,
+        "memory_percent": 52.3,
+        "error_count": 640,
+        "p99_latency_sec": 14.2
+      },
+      "logs_excerpt": [
+        "2026-09-29T11:00:15Z ERROR [checkout-gateway] httpx.ReadTimeout: timed out after 15000ms calling https://api.partner-processor.net/v2/charges",
+        "2026-09-29T11:00:22Z WARN  [gateway] thread pool 98% busy waiting on downstream I/O"
+      ]
+    },
+    "INC-004": {
+      "id": "INC-004",
+      "title": "Notification Service OOMKilled Worker Pod CrashLoop",
+      "service": "Notification Service",
+      "error_type": "Kubernetes OOMKilled",
+      "severity": "MEDIUM",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T08:20:00Z",
+      "resolved_at": "2026-09-29T08:48:00Z",
+      "duration_min": 28,
+      "engineer": "Priya Sharma",
+      "shift": "Day Shift (08:00 - 17:00)",
+      "deployment": {
+        "service": "notification-service",
+        "version": "v1.4.1",
+        "deployed_at": "2026-09-29T08:00:00Z"
+      },
+      "symptoms": [
+        "Worker pods entering CrashLoopBackOff state repeatedly",
+        "Kubernetes container status OOMKilled (Exit Code 137)",
+        "Notification queue backlog accumulated 45,000 pending messages"
+      ],
+      "investigation_steps": [
+        "Retrieved pod termination events via kubectl describe pod",
+        "Analyzed JVM heap dump and native memory profiler traces",
+        "Identified unbounded byte buffer accumulation in PDF invoice attachment generator",
+        "Found unclosed file descriptors in temporary file generation routine"
+      ],
+      "findings": [
+        "Invoice generator was retaining unmanaged byte buffers in global scope",
+        "Each PDF attachment leaked approximately 8MB of RAM until pod exceeded 512Mi limit"
+      ],
+      "root_cause": "Memory leak caused by unmanaged byte buffer retention in PDF invoice rendering library during high-volume batch dispatch.",
+      "actions_taken": [
+        "Patched PDF generation logic to use streaming buffers with explicit cleanup",
+        "Temporarily bumped pod memory limit from 512Mi to 1Gi",
+        "Triggered manual worker pod rollout"
+      ],
+      "resolution": "Updated PDF rendering buffer context disposal, enforced garbage collection, and increased pod limit to 1Gi.",
+      "verification": "Pod memory consumption stabilized at 190Mi under 10,000 notifications/min load with zero pod restarts.",
+      "recommendations": [
+        "Implement container memory leak synthetic soak tests in staging pipeline",
+        "Add Prometheus alert for pod memory utilization > 80% with positive rate of change"
+      ],
+      "engineer_feedback": "Memory leak hotfix verified stable across all 6 notification worker replicas.",
+      "similarity_score": 0.82,
+      "telemetry": {
+        "cpu_percent": 42.1,
+        "memory_percent": 99.8,
+        "error_count": 520,
+        "p99_latency_sec": 3.1
+      },
+      "logs_excerpt": [
+        "2026-09-29T08:20:14Z WARN  [kubelet] Container notification-worker exceeded memory limit (512Mi)",
+        "2026-09-29T08:20:15Z ERROR [kubernetes] Pod notification-worker-7df94-xk29j killed (OOMKilled: 137)"
+      ]
+    },
+    "INC-119": {
+      "id": "INC-119",
+      "title": "Payment API Connection Pool Drain During Surge",
+      "service": "Payment API",
+      "error_type": "HTTP 503",
+      "severity": "CRITICAL",
+      "status": "RESOLVED",
+      "started_at": "2026-09-02T16:00:00Z",
+      "resolved_at": "2026-09-02T16:15:00Z",
+      "duration_min": 15,
+      "deployment": {
+        "service": "payment-service",
+        "version": "v2.3.9"
+      },
+      "symptoms": [
+        "HTTP 503 error spike across 3 availability zones",
+        "Database connection pool saturated (60/60 sockets)",
+        "Payment gateway callback drop"
+      ],
+      "root_cause": "Same pattern detected: connection pool exhaustion triggered by unclosed database connections in retry loop.",
+      "resolution": "Fixed unclosed session context manager and bumped connection pool max size to 120.",
+      "engineer_feedback": "Confirmed recurring connection leak pattern. Memory updated.",
+      "similarity_score": 0.89
+    },
+    "INC-121": {
+      "id": "INC-121",
+      "title": "Payment API Gateway Timeout & Socket Leak",
+      "service": "Payment API",
+      "error_type": "HTTP 504",
+      "severity": "HIGH",
+      "status": "RESOLVED",
+      "started_at": "2026-09-10T11:20:00Z",
+      "resolved_at": "2026-09-10T11:42:00Z",
+      "duration_min": 22,
+      "deployment": {
+        "service": "payment-service",
+        "version": "v2.4.0",
+        "deployed_at": "2026-09-10T11:00:00Z"
+      },
+      "symptoms": [
+        "Database timeout on payment settlement queries",
+        "TCP socket exhaustion between application pods and RDS cluster",
+        "P99 latency > 4.5s"
+      ],
+      "root_cause": "Database connection limit was set too low relative to horizontal pod autoscaling threshold.",
+      "resolution": "Adjusted connection limit configuration in Helm chart and scaled PgBouncer connection poolers.",
+      "engineer_feedback": "Adjusting connection pool limits per replica prevented further socket saturation.",
+      "similarity_score": 0.81,
+      "telemetry": {
+        "cpu_percent": 54.0,
+        "memory_percent": 71.0,
+        "error_count": 1490,
+        "p99_latency_sec": 4.5
+      }
+    },
+    "INC-305": {
+      "id": "INC-305",
+      "incident_id": "INC-305",
+      "title": "authentication-service: Login requests intermittently returned HTTP 503 during peak ",
+      "service": "authentication-service",
+      "status": "RESOLVED",
+      "started_at": "2026-09-28T23:34:08.253533Z",
+      "severity": "HIGH",
+      "error_type": "Login requests intermittently returned HTTP 503 during peak traffic.",
+      "symptoms": [
+        "Login requests intermittently returned HTTP 503 during peak traffic."
+      ],
+      "observations": [],
+      "evidence": [
+        "Database connections reached the configured maximum during the incident.",
+        "Application logs showed unreleased database connections.",
+        "The background authentication worker was confirmed to retain connections after failed transactions."
+      ],
+      "verification": [
+        "Verified database connections returned to normal.",
+        "HTTP 503 errors stopped after the fix."
+      ],
+      "resolution_steps": [
+        "Fixed the connection release logic in the authentication worker.",
+        "Restarted authentication-service pods."
+      ],
+      "root_cause": "The database connection pool was exhausted because an authentication background worker opened database connections and did not release them after failed transactions.",
+      "resolution": [
+        "Fixed the connection release logic in the authentication worker.",
+        "Restarted authentication-service pods."
+      ],
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-305 recorded for authentication-service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "Login requests intermittently returned HTTP 503 during peak traffic.",
+      "last_synced_at": "2026-09-28T23:34:52.194118Z"
+    },
+    "INC-306": {
+      "id": "INC-306",
+      "duration_min": 0,
+      "error_type": "Login requests are intermittently returning HTTP 503 during peak traffic.",
+      "evidence": [],
+      "incident_id": "INC-306",
+      "last_synced_at": "2026-09-28T23:57:48.629480Z",
+      "observations": [
+        "Database connections are approaching the configured maximum.",
+        "Application logs show connection acquisition delays.",
+        "The issue began during increased traffic."
+      ],
+      "resolution": null,
+      "resolution_steps": [],
+      "root_cause": null,
+      "service": "authentication-service",
+      "severity": "HIGH",
+      "started_at": "2026-09-28T23:57:48.628665Z",
+      "status": "INVESTIGATING",
+      "symptom": "Login requests are intermittently returning HTTP 503 during peak traffic.",
+      "symptoms": [
+        "Login requests are intermittently returning HTTP 503 during peak traffic."
+      ],
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-306 recorded for authentication-service",
+          "type": "warning"
+        }
+      ],
+      "title": "authentication-service: Login requests are intermittently returning HTTP 503 during ",
+      "verification": []
+    },
+    "INC-205": {
+      "id": "INC-205",
+      "title": "Order Service Database Timeout & Inventory Sync Failure",
+      "service": "Order Service",
+      "error_type": "DB timeout",
+      "severity": "HIGH",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-28T10:45:00Z",
+      "duration_min": 8,
+      "deployment": {
+        "service": "order-service",
+        "version": "v1.9.8",
+        "deployed_at": "2026-09-28T10:30:00Z",
+        "author": "order-team@microtech.io",
+        "changes_summary": "Added bulk inventory reservation query"
+      },
+      "symptoms": [
+        "Order placement failing with 504 Gateway Timeout",
+        "Postgres replica lag exceeded 45 seconds",
+        "Lock wait queue reached 85 transactions"
+      ],
+      "telemetry": {
+        "cpu_percent": 82.5,
+        "memory_percent": 65.2,
+        "error_count": 890,
+        "p99_latency_sec": 4.6,
+        "db_active_connections": 80,
+        "db_max_connections": 80
+      },
+      "logs_excerpt": [
+        "[2026-09-28 10:44:12] [ERROR] [order-service] QueryTimeoutException: statement timeout after 5000ms on table 'order_reservations'",
+        "[2026-09-28 10:44:30] [WARN] [postgres-pool] Connection pool at 100% capacity"
+      ],
+      "timeline": [
+        {
+          "time": "10:30 AM",
+          "event": "Deployment v1.9.8 applied to order-service",
+          "type": "deploy"
+        },
+        {
+          "time": "10:45 AM",
+          "event": "Inventory reservation queries started timing out",
+          "type": "error"
+        },
+        {
+          "time": "10:46 AM",
+          "event": "OpsMind correlated with INC-117 (87% similarity)",
+          "type": "agent"
+        }
+      ],
+      "last_synced_at": "2026-09-29T13:27:49.176951Z"
+    },
+    "INC-206": {
+      "id": "INC-206",
+      "title": "Auth Service High Latency & Token Validation Degraded",
+      "service": "Auth Service",
+      "error_type": "High latency",
+      "severity": "MEDIUM",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-28T10:50:00Z",
+      "duration_min": 4,
+      "deployment": {
+        "service": "auth-service",
+        "version": "v3.1.2",
+        "deployed_at": "2026-09-28T09:00:00Z",
+        "author": "security-team@microtech.io",
+        "changes_summary": "Rotated Redis JWT verification keys"
+      },
+      "symptoms": [
+        "Authentication endpoints response time escalated from 12ms to 1,250ms",
+        "Redis cluster cache hit ratio degraded from 99.2% to 41.5%",
+        "Downstream services queueing login validation requests"
+      ],
+      "telemetry": {
+        "cpu_percent": 35.0,
+        "memory_percent": 55.4,
+        "error_count": 312,
+        "p99_latency_sec": 1.25,
+        "db_active_connections": 22,
+        "db_max_connections": 60
+      },
+      "logs_excerpt": [
+        "[2026-09-28 10:49:50] [WARN] [auth-service] RedisCacheMiss: Fallback to database user verification for 58% requests",
+        "[2026-09-28 10:50:05] [INFO] [auth-service] Latency alert triggered on /oauth/token"
+      ],
+      "timeline": [
+        {
+          "time": "09:00 AM",
+          "event": "JWT Key rotation deployed",
+          "type": "deploy"
+        },
+        {
+          "time": "10:50 AM",
+          "event": "Cache miss cascade increased latency to 1.25s",
+          "type": "warning"
+        },
+        {
+          "time": "10:51 AM",
+          "event": "OpsMind suggested Redis cache warmup runbook",
+          "type": "agent"
+        }
+      ],
+      "last_synced_at": "2026-09-29T13:27:49.203888Z"
+    },
+    "INC-401": {
+      "id": "INC-401",
+      "incident_id": "INC-401",
+      "title": "payment-service: HTTP 503 during peak traffic",
+      "service": "payment-service",
+      "status": "unresolved investigation",
+      "started_at": "2026-09-29T00:17:00.611661Z",
+      "severity": "HIGH",
+      "error_type": "HTTP 503 during peak traffic",
+      "symptoms": [
+        "HTTP 503 during peak traffic",
+        "payment requests are intermittently returning HTTP 503 during peak traffic."
+      ],
+      "observations": [
+        "Connection acquisition delays",
+        "DB pool at 98%",
+        "CPU utilization is at 98%",
+        "Application logs show HTTP worker socket exhaustion",
+        "Database connections remain low at 5 active connections"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-401 recorded for payment-service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "payment requests are intermittently returning HTTP 503 during peak traffic.",
+      "last_synced_at": "2026-09-29T14:55:08.648914Z"
+    },
+    "INC-402": {
+      "id": "INC-402",
+      "incident_id": "INC-402",
+      "title": "order-service Incident",
+      "service": "order-service",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T13:43:04.026101Z",
+      "severity": "HIGH",
+      "error_type": "Unknown Error",
+      "symptoms": [],
+      "observations": [
+        "Slow queries on order table",
+        "Connection pool exhaustion"
+      ],
+      "evidence": [
+        "pg_stat_activity showed 48 idle-in-transaction connections",
+        "Slow query logs confirmed 4.2s sequence scans on orders"
+      ],
+      "verification": [
+        "Query latency dropped from 4.2s to 12ms",
+        "HTTP 504 errors ceased across all pods"
+      ],
+      "resolution_steps": [],
+      "root_cause": "Unindexed foreign key lookups starved PostgreSQL connection pool.",
+      "resolution": "Added btree index on orders(user_id) and scaled PgBouncer pool to 100.",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-402 recorded for order-service",
+          "type": "warning"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Unindexed foreign key lookups starved PostgreSQL connection pool.",
+          "type": "resolved"
+        }
+      ],
+      "symptom": "HTTP 504 Gateway Timeout during checkout spikes",
+      "last_synced_at": "2026-09-29T13:43:04.098471Z",
+      "resolved_at": "2026-09-29T13:43:04.095411Z",
+      "engineer_feedback": "Confirmed by engineer."
+    },
+    "INC-403": {
+      "id": "INC-403",
+      "incident_id": "INC-403",
+      "title": "billing-service Incident",
+      "service": "billing-service",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T13:43:07.888138Z",
+      "severity": "HIGH",
+      "error_type": "Unknown Error",
+      "symptoms": [],
+      "observations": [
+        "Webhook queue latency exceeded 300s",
+        "Worker threads blocked on unreleased sockets"
+      ],
+      "evidence": [
+        "Worker thread pool saturation confirmed at 20/20 threads",
+        "Socket timeout logs against external gateway"
+      ],
+      "verification": [
+        "Webhook queue latency dropped to <500ms",
+        "Zero dropped webhook notifications"
+      ],
+      "resolution_steps": [],
+      "root_cause": "Async webhook dispatcher thread pool exhausted due to blocking external API calls.",
+      "resolution": "Configured non-blocking HTTP client and increased worker threads from 20 to 50.",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-403 recorded for billing-service",
+          "type": "warning"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Async webhook dispatcher thread pool exhausted due to blocking external API calls.",
+          "type": "resolved"
+        }
+      ],
+      "symptom": "Stripe webhook callback worker starvation under heavy load",
+      "last_synced_at": "2026-09-29T13:43:07.953194Z",
+      "resolved_at": "2026-09-29T13:43:07.950116Z",
+      "engineer_feedback": "Confirmed by engineer."
+    },
+    "INC-207": {
+      "id": "INC-207",
+      "title": "Kafka Consumer Rebalance Cascade & Partition Lag Spike",
+      "service": "Notification Service",
+      "error_type": "Consumer Lag & Rebalance Storm",
+      "severity": "HIGH",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-28T10:52:00Z",
+      "duration_min": 6,
+      "deployment": {
+        "service": "notification-service",
+        "version": "v1.4.0",
+        "deployed_at": "2026-09-28T10:48:00Z",
+        "author": "event-stream@microtech.io",
+        "commit_hash": "e92bc44",
+        "changes_summary": "Upgraded batch processing chunk size and consumer poll timeout"
+      },
+      "symptoms": [
+        "Consumer lag jumped to 142,000 unread messages across 16 partitions",
+        "Continuous consumer group rebalances causing message delivery halts",
+        "Worker heartbeat timeouts exceeded 30,000ms"
+      ],
+      "telemetry": {
+        "cpu_percent": 88.4,
+        "memory_percent": 62.1,
+        "error_count": 650,
+        "p99_latency_sec": 5.2,
+        "db_active_connections": 12,
+        "db_max_connections": 50
+      },
+      "logs_excerpt": [
+        "[2026-09-28 10:52:10] [ERROR] [notification-service] CommitFailedException: Commit cannot be completed since the group has rebalanced and assigned the partitions to another member",
+        "[2026-09-28 10:52:18] [WARN] [kafka-cluster] Member worker-7c9b8 exceeded max.poll.interval.ms (30000ms), kicking member from consumer group"
+      ],
+      "timeline": [
+        {
+          "time": "10:48 AM",
+          "event": "Deployment v1.4.0 rolled out to notification-service workers",
+          "type": "deploy"
+        },
+        {
+          "time": "10:52 AM",
+          "event": "Consumer lag threshold breached (>100k messages). PagerDuty alert triggered",
+          "type": "error"
+        },
+        {
+          "time": "10:53 AM",
+          "event": "OpsMind AI Agent queried Hindsight: No prior historical incidents found",
+          "type": "agent"
+        },
+        {
+          "time": "10:53 AM",
+          "event": "Switched to AI Investigation Mode (Brain 1)",
+          "type": "agent"
+        }
+      ],
+      "last_synced_at": "2026-09-29T13:27:49.229690Z"
+    },
+    "INC-TEST-01": {
+      "id": "INC-TEST-01",
+      "incident_id": "INC-TEST-01",
+      "title": "billing-api Incident",
+      "service": "billing-api",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-29T13:45:48.304598Z",
+      "severity": "HIGH",
+      "error_type": "Unknown Error",
+      "symptoms": [],
+      "observations": [],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-TEST-01 recorded for billing-api",
+          "type": "warning"
+        }
+      ],
+      "symptom": "Payment webhook timeout",
+      "last_synced_at": "2026-09-29T13:45:48.308155Z"
+    },
+    "INC-REAL-01": {
+      "id": "INC-REAL-01",
+      "incident_id": "INC-REAL-01",
+      "title": "Payment API returning intermittent 500 errors",
+      "service": "Payment API",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T13:53:46.626319Z",
+      "severity": "CRITICAL",
+      "error_type": "HTTP 500 & Connection Timeout",
+      "symptoms": [
+        "API error rate increased to 8.4%",
+        "Database connections are timing out",
+        "Payment checkout latency spiked to 4.2s"
+      ],
+      "observations": [
+        "Postgres active connection count at 50/50 max limit",
+        "No root cause is known yet"
+      ],
+      "evidence": [
+        "Heap dump confirmed 42 unreleased asyncpg socket descriptors in payment webhook worker",
+        "Database server CPU was normal (28%), confirming issue was client-side socket leak"
+      ],
+      "verification": [
+        "Error rate dropped from 8.4% to 0.01%",
+        "Active DB connections stabilized at 12/50 under full production load"
+      ],
+      "resolution_steps": [],
+      "root_cause": "Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client disconnect).",
+      "resolution": "Restarted affected worker processes and deployed connection-pool context manager fix in v2.4.2 hotfix.",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-REAL-01 recorded for Payment API",
+          "type": "warning"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client disconnect).",
+          "type": "resolved"
+        }
+      ],
+      "symptom": "API error rate increased to 8.4%",
+      "last_synced_at": "2026-09-29T13:53:49.106200Z",
+      "resolved_at": "2026-09-29T13:53:49.105422Z",
+      "engineer_feedback": "Alex Rivera (Day Shift SRE) confirmed fix. Night shift should monitor connection pool."
+    },
+    "INC-REAL-02": {
+      "id": "INC-REAL-02",
+      "incident_id": "INC-REAL-02",
+      "title": "Payment API Database Connection Timeout during Batch Reporting",
+      "service": "Payment API",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-29T13:53:53.873474Z",
+      "severity": "HIGH",
+      "error_type": "Database Connection Timeout",
+      "symptoms": [
+        "Postgres connection timeouts across all API clients",
+        "Database server CPU pegged at 98%",
+        "p99 latency spiked to 6.8s on primary read/write node"
+      ],
+      "observations": [
+        "pg_stat_activity shows long-running sequential scan query on ledger_transactions table",
+        "Worker processes have NO socket leaks"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-REAL-02 recorded for Payment API",
+          "type": "warning"
+        }
+      ],
+      "symptom": "Postgres connection timeouts across all API clients",
+      "last_synced_at": "2026-09-29T13:53:53.875846Z"
+    },
+    "INC-REAL-03": {
+      "id": "INC-REAL-03",
+      "incident_id": "INC-REAL-03",
+      "title": "Notification Service Kafka Consumer Lag Rebalance Stall",
+      "service": "Notification Service",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-29T13:53:57.812730Z",
+      "severity": "MEDIUM",
+      "error_type": "Kafka Consumer Rebalance Stall",
+      "symptoms": [
+        "Kafka consumer lag spiked to 250,000 messages on notification.email topic",
+        "Consumer group entering continuous rebalance loops",
+        "No prior Kafka rebalance incidents recorded in database"
+      ],
+      "observations": [
+        "Worker threads blocked on downstream SMS gateway",
+        "Novel issue signature"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-REAL-03 recorded for Notification Service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "Kafka consumer lag spiked to 250,000 messages on notification.email topic",
+      "last_synced_at": "2026-09-29T13:53:57.815536Z"
+    },
+    "INC-REAL-04": {
+      "id": "INC-REAL-04",
+      "incident_id": "INC-REAL-04",
+      "title": "Notification Service Push Notification Kafka Consumer Stalling",
+      "service": "Notification Service",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-29T13:54:00.725369Z",
+      "severity": "HIGH",
+      "error_type": "Kafka Consumer Rebalance Stall",
+      "symptoms": [
+        "Kafka consumer rebalance stall on notification.push topic",
+        "Consumer lag accumulating rapidly"
+      ],
+      "observations": [],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-REAL-04 recorded for Notification Service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "Kafka consumer rebalance stall on notification.push topic",
+      "last_synced_at": "2026-09-29T13:54:00.727309Z"
+    },
+    "INC-REAL-05": {
+      "id": "INC-REAL-05",
+      "incident_id": "INC-REAL-05",
+      "title": "Auth Service Latency Degradation post v3.2.0",
+      "service": "Auth Service",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T13:54:00.823560Z",
+      "severity": "MEDIUM",
+      "error_type": "High Latency & Token Validation Delay",
+      "symptoms": [
+        "JWT token validation latency increased from 5ms to 450ms"
+      ],
+      "observations": [],
+      "evidence": [
+        "Redis monitor log showed 88% miss on auth:token:* keys"
+      ],
+      "verification": [
+        "Token validation latency returned to 4.8ms"
+      ],
+      "resolution_steps": [],
+      "root_cause": "Key prefix mismatch in v3.2.0 cache key generator caused 88% cache miss rate.",
+      "resolution": "Patched cache key generator in v3.2.1 and warmed token cache.",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-REAL-05 recorded for Auth Service",
+          "type": "warning"
+        },
+        {
+          "time": "13:54",
+          "event": "State updated to INVESTIGATION: Engineer actively testing hypothesis in staging/telemetry",
+          "type": "warning"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Key prefix mismatch in v3.2.0 cache key generator caused 88% cache miss rate.",
+          "type": "resolved"
+        }
+      ],
+      "symptom": "JWT token validation latency increased from 5ms to 450ms",
+      "last_synced_at": "2026-09-29T13:54:00.986823Z",
+      "lifecycle_state": "INVESTIGATION",
+      "resolved_at": "2026-09-29T13:54:00.983875Z",
+      "engineer_feedback": "Confirmed by engineer."
+    },
+    "INC-HS-TEST-01": {
+      "id": "INC-HS-TEST-01",
+      "incident_id": "INC-HS-TEST-01",
+      "title": "Order Processing Service stuck in PROCESSING state",
+      "service": "Order Processing Service",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-29T14:03:21.074457Z",
+      "severity": "HIGH",
+      "error_type": "Transaction Acknowledgement Hang",
+      "symptoms": [
+        "Order queue depth increasing steadily",
+        "Worker acknowledgement latency increasing",
+        "Orders intermittently stuck in PROCESSING state"
+      ],
+      "observations": [
+        "Worker acknowledgement transactions failing to commit on retry",
+        "No confirmed root cause yet"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-HS-TEST-01 recorded for Order Processing Service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "Order queue depth increasing steadily",
+      "last_synced_at": "2026-09-29T14:03:21.075723Z"
+    },
+    "INC-HS-TEST-02": {
+      "id": "INC-HS-TEST-02",
+      "incident_id": "INC-HS-TEST-02",
+      "title": "Order workers acknowledging messages slowly and orders remain processing",
+      "service": "Order Processing Service",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-29T14:03:26.202959Z",
+      "severity": "HIGH",
+      "error_type": "Transaction Acknowledgement Hang",
+      "symptoms": [
+        "Order workers are acknowledging messages slowly and orders remain processing",
+        "Consumer throughput dropping"
+      ],
+      "observations": [],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-HS-TEST-02 recorded for Order Processing Service",
+          "type": "warning"
+        }
+      ],
+      "symptom": "Order workers are acknowledging messages slowly and orders remain processing",
+      "last_synced_at": "2026-09-29T14:03:26.208086Z"
+    },
+    "INC-990": {
+      "id": "INC-990",
+      "incident_id": "INC-990",
+      "title": "quantum-ledger-service: Cryptographic state synchronization failure across consensus",
+      "service": "quantum-ledger-service",
+      "status": "unresolved investigation",
+      "started_at": "2026-09-29T14:50:29.730751Z",
+      "severity": "HIGH",
+      "error_type": "Cryptographic state synchronization failure across consensus nodes.",
+      "symptoms": [
+        "Cryptographic state synchronization failure across consensus nodes."
+      ],
+      "observations": [
+        "Raft consensus quorum lost",
+        "State mismatch on block height 44901",
+        "Network partition on region eu-central-2"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": "NTP time drift caused Raft leader lease expiration across AZs",
+      "resolution": "Synchronized chrony NTP daemon and increased election timeout to 1500ms",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-990 recorded for quantum-ledger-service",
+          "type": "warning"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: NTP time drift caused Raft leader lease expiration across AZs",
+          "type": "resolved"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: NTP time drift caused Raft leader lease expiration across AZs",
+          "type": "resolved"
+        }
+      ],
+      "symptom": "Cryptographic state synchronization failure across consensus nodes.",
+      "last_synced_at": "2026-09-29T14:55:08.802277Z"
+    },
+    "INC-995": {
+      "id": "INC-995",
+      "incident_id": "INC-995",
+      "title": "persistence-audit-service: Disk write durability audit test.",
+      "service": "persistence-audit-service",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T14:53:16.999023Z",
+      "severity": "HIGH",
+      "error_type": "Disk write durability audit test.",
+      "symptoms": [
+        "Disk write durability audit test."
+      ],
+      "observations": [
+        "Verifying SQLite database persistence across process restarts",
+        "Verifying JSON organizational memory survival"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": "Disk journal flush synchronization verified in SQLite WAL mode",
+      "resolution": "Applied WAL mode persistence to opsmind.db and verified on restart",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-995 recorded for persistence-audit-service",
+          "type": "warning"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Disk journal flush synchronization verified in SQLite WAL mode",
+          "type": "resolved"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Disk journal flush synchronization verified in SQLite WAL mode",
+          "type": "resolved"
+        }
+      ],
+      "symptom": "Disk write durability audit test.",
+      "last_synced_at": "2026-09-29T14:53:41.012875Z",
+      "resolved_at": "2026-09-29T14:53:41.011800Z",
+      "engineer_feedback": "Confirmed by engineer."
+    },
+    "INC-550": {
+      "id": "INC-550",
+      "incident_id": "INC-550",
+      "title": "Payment API Elevated 503 Gateway Drop",
+      "service": "Payment API",
+      "status": "RESOLVED",
+      "started_at": "2026-09-29T16:03:59.183317Z",
+      "severity": "CRITICAL",
+      "error_type": "HTTP 503",
+      "symptoms": [
+        "Payment checkout transactions dropping with HTTP 503",
+        "P99 latency spiked from 42ms to 3,900ms",
+        "Database connection pool reported 0 available sockets (50/50 in use)"
+      ],
+      "observations": [
+        "Active connections hit max pool limit of 50",
+        "Application logs show PoolAcquireTimeoutException",
+        "CPU and memory on application pods remain healthy at 35%",
+        "Recent deployment v2.4.1 altered connection lease reaper"
+      ],
+      "evidence": [
+        "Pool active count dropped from 50/50 to 18/65 after configuration reload",
+        "P99 latency stabilized back to baseline 45ms",
+        "Zero HTTP 503 errors recorded in subsequent 15-minute telemetry window"
+      ],
+      "verification": [
+        "Executed load-test runner against /checkout endpoint with 500 RPS \u2014 0 errors",
+        "Verified connection cleanup in PostgreSQL pg_stat_activity"
+      ],
+      "resolution_steps": [],
+      "root_cause": "Database connection pool saturated under concurrent peak checkout checkout traffic post-deployment v2.4.1",
+      "resolution": "Increased connection pool size to 65 sockets, tuned idle reaper to 30s, and restarted payment-service pods",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-550 recorded for Payment API",
+          "type": "warning"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Database connection pool saturated under concurrent peak checkout checkout traffic post-deployment v2.4.1",
+          "type": "resolved"
+        }
+      ],
+      "symptom": "Payment checkout transactions dropping with HTTP 503",
+      "last_synced_at": "2026-09-29T16:04:01.559859Z",
+      "resolved_at": "2026-09-29T16:04:01.559484Z",
+      "engineer_feedback": "Permanent lesson: Always configure connection acquisition timeout alert at 80% pool threshold."
+    },
+    "INC-602": {
+      "id": "INC-602",
+      "incident_id": "INC-602",
+      "title": "Payment API: payment requests are intermittently returning HTTP 503 durin",
+      "service": "Payment API",
+      "status": "unresolved investigation",
+      "started_at": "2026-09-29T14:57:50.739530Z",
+      "severity": "HIGH",
+      "error_type": "payment requests are intermittently returning HTTP 503 during peak traffic.",
+      "symptoms": [
+        "payment requests are intermittently returning HTTP 503 during peak traffic."
+      ],
+      "observations": [
+        "CPU utilization is normal at 40%",
+        "Database connection pool has 45 free connections",
+        "Upstream OAuth2 authentication provider is timing out on token validation requests"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-602 recorded for Payment API",
+          "type": "warning"
+        }
+      ],
+      "symptom": "payment requests are intermittently returning HTTP 503 during peak traffic.",
+      "last_synced_at": "2026-09-29T16:04:06.674604Z"
+    },
+    "INC-888": {
+      "id": "INC-888",
+      "incident_id": "INC-888",
+      "title": "satellite-telemetry-gateway: Ground station carrier phase lock lost on transponder band K",
+      "service": "satellite-telemetry-gateway",
+      "status": "unresolved investigation",
+      "started_at": "2026-09-29T14:57:50.842727Z",
+      "severity": "HIGH",
+      "error_type": "Ground station carrier phase lock lost on transponder band Ku-4.",
+      "symptoms": [
+        "Ground station carrier phase lock lost on transponder band Ku-4."
+      ],
+      "observations": [
+        "Doppler shift compensation error +14.2 kHz",
+        "Bit error rate spiked above 10^-3",
+        "Atmospheric attenuation index 8.9 dB"
+      ],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": "Solar flare geomagnetic storm induced ionospheric scintillation",
+      "resolution": "Switched downlink frequency band to Ka-1 backup transponder and recalibrated phase lock loop",
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-888 recorded for satellite-telemetry-gateway",
+          "type": "warning"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Solar flare geomagnetic storm induced ionospheric scintillation",
+          "type": "resolved"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Solar flare geomagnetic storm induced ionospheric scintillation",
+          "type": "resolved"
+        },
+        {
+          "time": "Just now",
+          "event": "Incident resolved: Solar flare geomagnetic storm induced ionospheric scintillation",
+          "type": "resolved"
+        }
+      ],
+      "symptom": "Ground station carrier phase lock lost on transponder band Ku-4.",
+      "last_synced_at": "2026-09-29T16:04:06.740664Z"
+    },
+    "INC-HS-LIVE-TEST-001": {
+      "id": "INC-HS-LIVE-TEST-001",
+      "incident_id": "INC-HS-LIVE-TEST-001",
+      "title": "Payment API: payment API failures caused by database connection pool exha",
+      "service": "Payment API",
+      "status": "INVESTIGATING",
+      "started_at": "2026-09-29T15:11:41.675284Z",
+      "severity": "HIGH",
+      "error_type": "payment API failures caused by database connection pool exhaustion (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+      "symptoms": [
+        "payment API failures caused by database connection pool exhaustion (OPSMIND_HINDSIGHT_LIVE_TEST_001)"
+      ],
+      "observations": [],
+      "evidence": [],
+      "verification": [],
+      "resolution_steps": [],
+      "root_cause": null,
+      "resolution": null,
+      "duration_min": 0,
+      "telemetry": {},
+      "timeline": [
+        {
+          "time": "Initial",
+          "event": "Incident INC-HS-LIVE-TEST-001 recorded for Payment API",
+          "type": "warning"
+        }
+      ],
+      "symptom": "payment API failures caused by database connection pool exhaustion (OPSMIND_HINDSIGHT_LIVE_TEST_001)",
+      "last_synced_at": "2026-09-29T15:11:41.676274Z"
+    }
+  }
+}

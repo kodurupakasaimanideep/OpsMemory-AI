@@ -1,0 +1,27 @@
+{
+  "id": "INC-004",
+  "title": "Notification Service OOMKilled Worker Pod CrashLoop",
+  "service": "Notification Service",
+  "error_type": "Kubernetes OOMKilled",
+  "severity": "MEDIUM",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T08:20:00Z",
+  "resolved_at": "2026-09-29T08:48:00Z",
+  "duration_min": 28,
+  "engineer": "Priya Sharma",
+  "shift": "Day Shift (08:00 - 17:00)",
+  "deployment": {
+    "service": "notification-service",
+    "version": "v1.4.1",
+    "deployed_at": "2026-09-29T08:00:00Z"
+  },
+  "symptoms": [
+    "Worker pods entering CrashLoopBackOff state repeatedly",
+    "Kubernetes container status OOMKilled (Exit Code 137)",
+    "Notification queue backlog accumulated 45,000 pending messages"
+  ],
+  "root_cause": "Memory leak caused by unmanaged byte buffer retention in PDF invoice rendering library during high-volume batch dispatch.",
+  "resolution": "Updated PDF rendering buffer context disposal, enforced garbage collection, and increased pod limit to 1Gi.",
+  "verification": "Pod memory consumption stabilized at 190Mi under 10,000 notifications/min load with zero pod restarts.",
+  "similarity_score": 0.82
+}

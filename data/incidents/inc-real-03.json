@@ -1,0 +1,46 @@
+{
+  "id": "INC-REAL-03",
+  "incident_id": "INC-REAL-03",
+  "title": "Notification Service Kafka Consumer Lag Rebalance Stall",
+  "service": "Notification Service",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T13:53:57.812730Z",
+  "severity": "MEDIUM",
+  "error_type": "Kafka Consumer Rebalance Stall",
+  "symptoms": [
+    "Kafka consumer lag spiked to 250,000 messages on notification.email topic",
+    "Consumer group entering continuous rebalance loops",
+    "No prior Kafka rebalance incidents recorded in database"
+  ],
+  "observations": [
+    "Worker threads blocked on downstream SMS gateway",
+    "Novel issue signature"
+  ],
+  "evidence": [
+    "Consumer logs: CommitFailedException: max.poll.interval.ms exceeded"
+  ],
+  "verification": [
+    "Consumer group stabilized, lag cleared from 250k to 0 in 12 minutes"
+  ],
+  "resolution_steps": [],
+  "root_cause": "Downstream SMS partner endpoint latency exceeded max.poll.interval.ms, triggering Kafka consumer heartbeat timeouts and rebalance loop.",
+  "resolution": "Increased max.poll.interval.ms from 60s to 300s and offloaded SMS dispatch to async background thread pool.",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-REAL-03 recorded for Notification Service",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Downstream SMS partner endpoint latency exceeded max.poll.interval.ms, triggering Kafka consumer heartbeat timeouts and rebalance loop.",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Kafka consumer lag spiked to 250,000 messages on notification.email topic",
+  "last_synced_at": "2026-09-29T13:53:57.815536Z",
+  "resolved_at": "2026-09-29T13:53:57.894502Z",
+  "engineer_feedback": "Confirmed by engineer."
+}

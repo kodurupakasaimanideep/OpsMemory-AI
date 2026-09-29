@@ -1,0 +1,31 @@
+{
+  "id": "INC-HS-TEST-02",
+  "incident_id": "INC-HS-TEST-02",
+  "title": "Order workers acknowledging messages slowly and orders remain processing",
+  "service": "Order Processing Service",
+  "status": "INVESTIGATING",
+  "started_at": "2026-09-29T14:03:26.202959Z",
+  "severity": "HIGH",
+  "error_type": "Transaction Acknowledgement Hang",
+  "symptoms": [
+    "Order workers are acknowledging messages slowly and orders remain processing",
+    "Consumer throughput dropping"
+  ],
+  "observations": [],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": null,
+  "resolution": null,
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-HS-TEST-02 recorded for Order Processing Service",
+      "type": "warning"
+    }
+  ],
+  "symptom": "Order workers are acknowledging messages slowly and orders remain processing",
+  "last_synced_at": "2026-09-29T14:03:26.208086Z"
+}

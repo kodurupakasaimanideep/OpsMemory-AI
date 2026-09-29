@@ -1,0 +1,44 @@
+{
+  "id": "INC-402",
+  "incident_id": "INC-402",
+  "title": "order-service Incident",
+  "service": "order-service",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T13:43:04.026101Z",
+  "severity": "HIGH",
+  "error_type": "Unknown Error",
+  "symptoms": [],
+  "observations": [
+    "Slow queries on order table",
+    "Connection pool exhaustion"
+  ],
+  "evidence": [
+    "pg_stat_activity showed 48 idle-in-transaction connections",
+    "Slow query logs confirmed 4.2s sequence scans on orders"
+  ],
+  "verification": [
+    "Query latency dropped from 4.2s to 12ms",
+    "HTTP 504 errors ceased across all pods"
+  ],
+  "resolution_steps": [],
+  "root_cause": "Unindexed foreign key lookups starved PostgreSQL connection pool.",
+  "resolution": "Added btree index on orders(user_id) and scaled PgBouncer pool to 100.",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-402 recorded for order-service",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Unindexed foreign key lookups starved PostgreSQL connection pool.",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "HTTP 504 Gateway Timeout during checkout spikes",
+  "last_synced_at": "2026-09-29T13:43:04.098471Z",
+  "resolved_at": "2026-09-29T13:43:04.095411Z",
+  "engineer_feedback": "Confirmed by engineer."
+}

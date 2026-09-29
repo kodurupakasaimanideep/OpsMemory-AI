@@ -1,0 +1,25 @@
+{
+  "id": "INC-119",
+  "deployment": {
+    "service": "payment-service",
+    "version": "v2.3.9"
+  },
+  "duration_min": 15,
+  "engineer_feedback": "Confirmed recurring connection leak pattern. Memory updated.",
+  "error_type": "HTTP 503",
+  "last_synced_at": "2026-09-28T22:21:52.625151Z",
+  "resolution": "Fixed unclosed session context manager and bumped connection pool max size to 120.",
+  "resolved_at": "2026-09-02T16:15:00Z",
+  "root_cause": "Same pattern detected: connection pool exhaustion triggered by unclosed database connections in retry loop.",
+  "service": "Payment API",
+  "severity": "CRITICAL",
+  "similarity_score": 0.89,
+  "started_at": "2026-09-02T16:00:00Z",
+  "status": "RESOLVED",
+  "symptoms": [
+    "HTTP 503 error spike across 3 availability zones",
+    "Database connection pool saturated (60/60 sockets)",
+    "Payment gateway callback drop"
+  ],
+  "title": "Payment API Connection Pool Drain During Surge"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "INC-306",
+  "duration_min": 0,
+  "error_type": "Login requests are intermittently returning HTTP 503 during peak traffic.",
+  "evidence": [],
+  "incident_id": "INC-306",
+  "last_synced_at": "2026-09-28T23:57:48.629480Z",
+  "observations": [
+    "Database connections are approaching the configured maximum.",
+    "Application logs show connection acquisition delays.",
+    "The issue began during increased traffic."
+  ],
+  "resolution": null,
+  "resolution_steps": [],
+  "root_cause": null,
+  "service": "authentication-service",
+  "severity": "HIGH",
+  "started_at": "2026-09-28T23:57:48.628665Z",
+  "status": "INVESTIGATING",
+  "symptom": "Login requests are intermittently returning HTTP 503 during peak traffic.",
+  "symptoms": [
+    "Login requests are intermittently returning HTTP 503 during peak traffic."
+  ],
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-306 recorded for authentication-service",
+      "type": "warning"
+    }
+  ],
+  "title": "authentication-service: Login requests are intermittently returning HTTP 503 during ",
+  "verification": []
+}

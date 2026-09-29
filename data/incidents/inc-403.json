@@ -1,0 +1,44 @@
+{
+  "id": "INC-403",
+  "incident_id": "INC-403",
+  "title": "billing-service Incident",
+  "service": "billing-service",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T13:43:07.888138Z",
+  "severity": "HIGH",
+  "error_type": "Unknown Error",
+  "symptoms": [],
+  "observations": [
+    "Webhook queue latency exceeded 300s",
+    "Worker threads blocked on unreleased sockets"
+  ],
+  "evidence": [
+    "Worker thread pool saturation confirmed at 20/20 threads",
+    "Socket timeout logs against external gateway"
+  ],
+  "verification": [
+    "Webhook queue latency dropped to <500ms",
+    "Zero dropped webhook notifications"
+  ],
+  "resolution_steps": [],
+  "root_cause": "Async webhook dispatcher thread pool exhausted due to blocking external API calls.",
+  "resolution": "Configured non-blocking HTTP client and increased worker threads from 20 to 50.",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-403 recorded for billing-service",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Async webhook dispatcher thread pool exhausted due to blocking external API calls.",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Stripe webhook callback worker starvation under heavy load",
+  "last_synced_at": "2026-09-29T13:43:07.953194Z",
+  "resolved_at": "2026-09-29T13:43:07.950116Z",
+  "engineer_feedback": "Confirmed by engineer."
+}

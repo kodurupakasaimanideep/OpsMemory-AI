@@ -1,0 +1,24 @@
+{
+  "id": "INC-119",
+  "title": "Payment API Connection Pool Drain During Surge",
+  "service": "Payment API",
+  "error_type": "HTTP 503",
+  "severity": "CRITICAL",
+  "status": "RESOLVED",
+  "started_at": "2026-09-02T16:00:00Z",
+  "resolved_at": "2026-09-02T16:15:00Z",
+  "duration_min": 15,
+  "deployment": {
+    "service": "payment-service",
+    "version": "v2.3.9"
+  },
+  "symptoms": [
+    "HTTP 503 error spike across 3 availability zones",
+    "Database connection pool saturated (60/60 sockets)",
+    "Payment gateway callback drop"
+  ],
+  "root_cause": "Same pattern detected: connection pool exhaustion triggered by unclosed database connections in retry loop.",
+  "resolution": "Fixed unclosed session context manager and bumped connection pool max size to 120.",
+  "engineer_feedback": "Confirmed recurring connection leak pattern. Memory updated.",
+  "similarity_score": 0.89
+}

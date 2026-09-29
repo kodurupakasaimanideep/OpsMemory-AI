@@ -1,0 +1,52 @@
+{
+  "id": "INC-205",
+  "title": "Order Service Database Timeout & Inventory Sync Failure",
+  "service": "Order Service",
+  "error_type": "DB timeout",
+  "severity": "HIGH",
+  "status": "INVESTIGATING",
+  "started_at": "2026-09-28T10:45:00Z",
+  "duration_min": 8,
+  "deployment": {
+    "service": "order-service",
+    "version": "v1.9.8",
+    "deployed_at": "2026-09-28T10:30:00Z",
+    "author": "order-team@microtech.io",
+    "changes_summary": "Added bulk inventory reservation query"
+  },
+  "symptoms": [
+    "Order placement failing with 504 Gateway Timeout",
+    "Postgres replica lag exceeded 45 seconds",
+    "Lock wait queue reached 85 transactions"
+  ],
+  "telemetry": {
+    "cpu_percent": 82.5,
+    "memory_percent": 65.2,
+    "error_count": 890,
+    "p99_latency_sec": 4.6,
+    "db_active_connections": 80,
+    "db_max_connections": 80
+  },
+  "logs_excerpt": [
+    "[2026-09-28 10:44:12] [ERROR] [order-service] QueryTimeoutException: statement timeout after 5000ms on table 'order_reservations'",
+    "[2026-09-28 10:44:30] [WARN] [postgres-pool] Connection pool at 100% capacity"
+  ],
+  "timeline": [
+    {
+      "time": "10:30 AM",
+      "event": "Deployment v1.9.8 applied to order-service",
+      "type": "deploy"
+    },
+    {
+      "time": "10:45 AM",
+      "event": "Inventory reservation queries started timing out",
+      "type": "error"
+    },
+    {
+      "time": "10:46 AM",
+      "event": "OpsMind correlated with INC-117 (87% similarity)",
+      "type": "agent"
+    }
+  ],
+  "last_synced_at": "2026-09-29T13:27:49.176951Z"
+}

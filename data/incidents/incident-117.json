@@ -1,0 +1,31 @@
+{
+  "id": "INC-117",
+  "title": "Order Service DB Pool Starvation after Deploy v1.9.4",
+  "service": "Order Service",
+  "error_type": "HTTP 500 / DB Timeout",
+  "severity": "HIGH",
+  "status": "RESOLVED",
+  "started_at": "2026-08-28T14:10:00Z",
+  "resolved_at": "2026-08-28T14:26:00Z",
+  "duration_min": 16,
+  "deployment": {
+    "service": "order-service",
+    "version": "v1.9.4",
+    "deployed_at": "2026-08-28T14:02:00Z"
+  },
+  "symptoms": [
+    "Order creation latency spiked over 5s",
+    "Database timeout on Postgres write replicas",
+    "Connection queue backed up with 180 waiting threads"
+  ],
+  "root_cause": "Unindexed foreign key query combined with default max_connections=40 starved pool on surge traffic.",
+  "resolution": "Rolled back deployment v1.9.4 and increased PostgreSQL connection pool limits to 120 sockets.",
+  "engineer_feedback": "Rollback and pool increase quickly restored order placement SLAs.",
+  "similarity_score": 0.87,
+  "telemetry": {
+    "cpu_percent": 68.0,
+    "memory_percent": 82.0,
+    "error_count": 1840,
+    "p99_latency_sec": 5.2
+  }
+}

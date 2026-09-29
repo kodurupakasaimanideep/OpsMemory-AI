@@ -1,0 +1,48 @@
+{
+  "id": "INC-HS-TEST-01",
+  "incident_id": "INC-HS-TEST-01",
+  "title": "Order Processing Service stuck in PROCESSING state",
+  "service": "Order Processing Service",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T14:03:21.074457Z",
+  "severity": "HIGH",
+  "error_type": "Transaction Acknowledgement Hang",
+  "symptoms": [
+    "Order queue depth increasing steadily",
+    "Worker acknowledgement latency increasing",
+    "Orders intermittently stuck in PROCESSING state"
+  ],
+  "observations": [
+    "Worker acknowledgement transactions failing to commit on retry",
+    "No confirmed root cause yet"
+  ],
+  "evidence": [
+    "RabbitMQ unacknowledged message counter climbed to 8,200",
+    "Worker thread dump showed uncommitted DB transaction"
+  ],
+  "verification": [
+    "Queue depth returned to 0",
+    "All orders transitioned to COMPLETED within 45s"
+  ],
+  "resolution_steps": [],
+  "root_cause": "Worker acknowledgement transaction was not committed after a retry path in order message consumer.",
+  "resolution": "Commit transaction before acknowledgement and restart affected order consumer workers.",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-HS-TEST-01 recorded for Order Processing Service",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Worker acknowledgement transaction was not committed after a retry path in order message consumer.",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Order queue depth increasing steadily",
+  "last_synced_at": "2026-09-29T14:03:21.075723Z",
+  "resolved_at": "2026-09-29T14:03:23.546165Z",
+  "engineer_feedback": "Order consumer retry logic patched."
+}

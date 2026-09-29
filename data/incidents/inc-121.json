@@ -1,0 +1,32 @@
+{
+  "id": "INC-121",
+  "deployment": {
+    "service": "payment-service",
+    "version": "v2.4.0",
+    "deployed_at": "2026-09-10T11:00:00Z"
+  },
+  "duration_min": 22,
+  "engineer_feedback": "Adjusting connection pool limits per replica prevented further socket saturation.",
+  "error_type": "HTTP 504",
+  "last_synced_at": "2026-09-28T22:21:57.935066Z",
+  "resolution": "Adjusted connection limit configuration in Helm chart and scaled PgBouncer connection poolers.",
+  "resolved_at": "2026-09-10T11:42:00Z",
+  "root_cause": "Database connection limit was set too low relative to horizontal pod autoscaling threshold.",
+  "service": "Payment API",
+  "severity": "HIGH",
+  "similarity_score": 0.81,
+  "started_at": "2026-09-10T11:20:00Z",
+  "status": "RESOLVED",
+  "symptoms": [
+    "Database timeout on payment settlement queries",
+    "TCP socket exhaustion between application pods and RDS cluster",
+    "P99 latency > 4.5s"
+  ],
+  "telemetry": {
+    "cpu_percent": 54.0,
+    "memory_percent": 71.0,
+    "error_count": 1490,
+    "p99_latency_sec": 4.5
+  },
+  "title": "Payment API Gateway Timeout & Socket Leak"
+}

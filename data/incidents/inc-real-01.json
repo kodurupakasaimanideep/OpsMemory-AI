@@ -1,0 +1,48 @@
+{
+  "id": "INC-REAL-01",
+  "incident_id": "INC-REAL-01",
+  "title": "Payment API returning intermittent 500 errors",
+  "service": "Payment API",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T13:53:46.626319Z",
+  "severity": "CRITICAL",
+  "error_type": "HTTP 500 & Connection Timeout",
+  "symptoms": [
+    "API error rate increased to 8.4%",
+    "Database connections are timing out",
+    "Payment checkout latency spiked to 4.2s"
+  ],
+  "observations": [
+    "Postgres active connection count at 50/50 max limit",
+    "No root cause is known yet"
+  ],
+  "evidence": [
+    "Heap dump confirmed 42 unreleased asyncpg socket descriptors in payment webhook worker",
+    "Database server CPU was normal (28%), confirming issue was client-side socket leak"
+  ],
+  "verification": [
+    "Error rate dropped from 8.4% to 0.01%",
+    "Active DB connections stabilized at 12/50 under full production load"
+  ],
+  "resolution_steps": [],
+  "root_cause": "Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client disconnect).",
+  "resolution": "Restarted affected worker processes and deployed connection-pool context manager fix in v2.4.2 hotfix.",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-REAL-01 recorded for Payment API",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Worker process had a connection leak in async webhook callback handler (database sockets unreleased on client disconnect).",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "API error rate increased to 8.4%",
+  "last_synced_at": "2026-09-29T13:53:49.106200Z",
+  "resolved_at": "2026-09-29T13:53:49.105422Z",
+  "engineer_feedback": "Alex Rivera (Day Shift SRE) confirmed fix. Night shift should monitor connection pool."
+}

@@ -1,0 +1,35 @@
+{
+  "id": "INC-TEST-01",
+  "incident_id": "INC-TEST-01",
+  "title": "billing-api Incident",
+  "service": "billing-api",
+  "status": "RESOLVED",
+  "started_at": "2026-09-29T13:45:48.304598Z",
+  "severity": "HIGH",
+  "error_type": "Unknown Error",
+  "symptoms": [],
+  "observations": [],
+  "evidence": [],
+  "verification": [],
+  "resolution_steps": [],
+  "root_cause": "Unreleased socket in billing worker thread",
+  "resolution": "Increased thread pool and added socket context manager",
+  "duration_min": 0,
+  "telemetry": {},
+  "timeline": [
+    {
+      "time": "Initial",
+      "event": "Incident INC-TEST-01 recorded for billing-api",
+      "type": "warning"
+    },
+    {
+      "time": "Just now",
+      "event": "Incident resolved: Unreleased socket in billing worker thread",
+      "type": "resolved"
+    }
+  ],
+  "symptom": "Payment webhook timeout",
+  "last_synced_at": "2026-09-29T13:45:48.308155Z",
+  "resolved_at": "2026-09-29T13:45:48.394227Z",
+  "engineer_feedback": "Verified in staging"
+}
