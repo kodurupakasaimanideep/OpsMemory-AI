@@ -176,6 +176,7 @@ When deploying to environments with an external Hindsight vector microservice:
    - Hypothesis formulated: Possible cause related to worker batch processing timeout post-deploy `v1.4.0`.
 
 4. **Demonstrate 3-State Workflow & Learning Loop**:
+
    - Advance state from 🟡 **Hypothesis** → 🔵 **Investigation** → 🟢 **Confirmed**.
    - Click **Confirm & Save to Memory**.
    - Submit the verified fix: `Increased max.poll.interval.ms to 300,000ms`.
